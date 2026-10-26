@@ -1,0 +1,48 @@
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 66 modules transformed.
+rendering chunks...
+computing gzip size...
+seo-evidence/production-fixture/404.html                                     0.87 kB │ gzip:   0.51 kB
+seo-evidence/production-fixture/experimentos/galeria.html                    1.58 kB │ gzip:   0.63 kB
+seo-evidence/production-fixture/experimentos/orbita.html                     1.58 kB │ gzip:   0.64 kB
+seo-evidence/production-fixture/experimentos/capitulos.html                  1.58 kB │ gzip:   0.64 kB
+seo-evidence/production-fixture/experimentos/index.html                      3.96 kB │ gzip:   1.58 kB
+seo-evidence/production-fixture/kit.html                                     4.81 kB │ gzip:   1.92 kB
+seo-evidence/production-fixture/monte.html                                   9.07 kB │ gzip:   2.99 kB
+seo-evidence/production-fixture/index.html                                  89.56 kB │ gzip:  17.49 kB
+seo-evidence/production-fixture/assets/main-BDL2aMLa.css                     4.36 kB │ gzip:   1.52 kB
+seo-evidence/production-fixture/assets/monte-BKtO7INz.css                    7.96 kB │ gzip:   2.25 kB
+seo-evidence/production-fixture/assets/whatsapp-DfyHm7KS.css                 8.44 kB │ gzip:   2.65 kB
+seo-evidence/production-fixture/assets/kit-BXBy7BY-.css                     13.71 kB │ gzip:   3.68 kB
+seo-evidence/production-fixture/assets/concepts-CbbuBgxS.css                16.61 kB │ gzip:   4.15 kB
+seo-evidence/production-fixture/assets/style-DxcLIcZu.css                   62.64 kB │ gzip:  15.39 kB
+seo-evidence/production-fixture/assets/bag-3fddWHcR.js                       0.29 kB │ gzip:   0.21 kB
+seo-evidence/production-fixture/assets/modulepreload-polyfill-B5Qt9EMX.js    0.71 kB │ gzip:   0.40 kB
+seo-evidence/production-fixture/assets/fallback-BBI-OHJT.js                  0.92 kB │ gzip:   0.58 kB
+seo-evidence/production-fixture/assets/lightScenes-DYKsGeCq.js               2.29 kB │ gzip:   1.17 kB
+seo-evidence/production-fixture/assets/monte-BE6sWF-T.js                     9.98 kB │ gzip:   3.90 kB
+seo-evidence/production-fixture/assets/imageSizes-CC1CmFLw.js               12.55 kB │ gzip:   2.56 kB
+seo-evidence/production-fixture/assets/kit3d-1z_nsmry.js                    15.61 kB │ gzip:   6.39 kB
+seo-evidence/production-fixture/assets/experience-Bz8fmXIS.js               17.86 kB │ gzip:   7.23 kB
+seo-evidence/production-fixture/assets/kit-BqV9D5ir.js                      23.05 kB │ gzip:   8.41 kB
+seo-evidence/production-fixture/assets/whatsapp-DdmnFh01.js                 25.11 kB │ gzip:   8.70 kB
+seo-evidence/production-fixture/assets/fullScenes-BzIjomfg.js               25.70 kB │ gzip:  10.13 kB
+seo-evidence/production-fixture/assets/main-B9iWqW32.js                     38.49 kB │ gzip:  14.02 kB
+seo-evidence/production-fixture/assets/kits-C1ZM7AHO.js                     55.85 kB │ gzip:  14.49 kB
+seo-evidence/production-fixture/assets/anim-CBgaOXZs.js                    140.11 kB │ gzip:  53.76 kB
+seo-evidence/production-fixture/assets/three-0cK9tT28.js                   583.57 kB │ gzip: 149.61 kB
+✓ built in 4.21s
+SEO: 14 páginas com HTML estático; 2 URLs no sitemap.
+{
+  "pages": 20,
+  "contentPages": 14,
+  "uniqueTitles": 14,
+  "uniqueDescriptions": 14,
+  "schemaGraphs": 14,
+  "sitemapUrls": 2,
+  "brokenLinks": 0,
+  "failures": [],
+  "warnings": []
+}
+Production fixture validated: real deployment URL remains unset; dist/ was not replaced.

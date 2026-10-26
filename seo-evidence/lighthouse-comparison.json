@@ -1,0 +1,62 @@
+{
+  "before-mobile": {
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-24T13:23:20.254Z",
+    "scores": {
+      "performance": 33,
+      "accessibility": 96,
+      "best-practices": 100,
+      "seo": 92
+    },
+    "lcpMs": 8001.514800000002,
+    "tbtMs": 9959.371300000003,
+    "cls": 0.0001241025445938155,
+    "warnings": [],
+    "robotsNoindex": false
+  },
+  "before-desktop": {
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-24T13:25:29.384Z",
+    "scores": {
+      "performance": 62,
+      "accessibility": 96,
+      "best-practices": 100,
+      "seo": 92
+    },
+    "lcpMs": 1325.5789249999998,
+    "tbtMs": 717.5,
+    "cls": 0.027387261477395442,
+    "warnings": [],
+    "robotsNoindex": false
+  },
+  "after-mobile": {
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-24T13:40:39.123Z",
+    "scores": {
+      "performance": 78,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66
+    },
+    "lcpMs": 4221.4854,
+    "tbtMs": 130.00000000000045,
+    "cls": 0,
+    "warnings": [],
+    "robotsNoindex": true
+  },
+  "after-desktop": {
+    "lighthouseVersion": "13.5.0",
+    "fetchTime": "2026-10-24T13:40:56.913Z",
+    "scores": {
+      "performance": 80,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 66
+    },
+    "lcpMs": 1418.933,
+    "tbtMs": 335.804125,
+    "cls": 0.002025975541039435,
+    "warnings": [],
+    "robotsNoindex": true
+  }
+}

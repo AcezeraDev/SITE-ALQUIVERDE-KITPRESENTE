@@ -1,0 +1,12 @@
+{
+  "checks": [
+    "Product: asset loading, automatic reveal, close, keyboard open, arrow rotation, drag, replay",
+    "Explicit 3D: controls remain visible and no horizontal overflow at 1024px and 390px",
+    "Collection: shared viewer switches away and back without duplicate controls or missing textures",
+    "Reduced motion with explicit 3D: immediate controls and stationary rendering",
+    "Mobile default: existing light mode and product photograph remain available",
+    "Asset failure: product photograph stays visible"
+  ],
+  "errors": [],
+  "missingAssets": []
+}

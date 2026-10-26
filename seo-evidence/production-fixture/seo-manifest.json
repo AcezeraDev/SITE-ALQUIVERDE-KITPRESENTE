@@ -1,0 +1,76 @@
+{
+  "siteUrl": "https://seo-validation.invalid",
+  "indexable": true,
+  "routes": [
+    {
+      "path": "/",
+      "title": "Kits de Natal com sabonetes vegetais | AlquiVerde",
+      "noindex": false
+    },
+    {
+      "path": "/monte.html",
+      "title": "Monte seu kit de sabonetes para presente | AlquiVerde",
+      "noindex": false
+    },
+    {
+      "path": "/kits/caixa-prata/",
+      "title": "Kit com 6 sabonetes vegetais Caixa Prata | AlquiVerde",
+      "noindex": true
+    },
+    {
+      "path": "/kits/laco-de-natal/",
+      "title": "Kit de banho com óleo de amêndoa Laço de Natal | AlquiVerde",
+      "noindex": true
+    },
+    {
+      "path": "/kits/feliz-natal/",
+      "title": "Kit Clássico de Natal com sabonetes e vela | AlquiVerde",
+      "noindex": true
+    },
+    {
+      "path": "/kits/laco-tropical/",
+      "title": "Kit de banho com óleo de uva Laço Tropical | AlquiVerde",
+      "noindex": true
+    },
+    {
+      "path": "/kits/especiarias-de-natal/",
+      "title": "Kit de Natal com sabonetes, canela e cravo | AlquiVerde",
+      "noindex": true
+    },
+    {
+      "path": "/kits/quarteto-de-aromas/",
+      "title": "Kit Cinco Aromas para perfumar a casa | AlquiVerde",
+      "noindex": true
+    },
+    {
+      "path": "/kits/aromas-do-jardim/",
+      "title": "Kit Aromas do Jardim em caixa dourada | AlquiVerde",
+      "noindex": true
+    },
+    {
+      "path": "/kits/aroma-dourado/",
+      "title": "Kit aromatizador elétrico e alecrim Aroma Dourado | AlquiVerde",
+      "noindex": true
+    },
+    {
+      "path": "/kits/raio-de-sol/",
+      "title": "Kit óleo de laranja e sabonete Raio de Sol | AlquiVerde",
+      "noindex": true
+    },
+    {
+      "path": "/kits/presente-variado/",
+      "title": "Kit presente com 3 sabonetes vegetais sortidos | AlquiVerde",
+      "noindex": true
+    },
+    {
+      "path": "/kits/oleo-de-semente-de-uva/",
+      "title": "Óleo de semente de uva em caixa para presente | AlquiVerde",
+      "noindex": true
+    },
+    {
+      "path": "/kits/vela-de-panetone/",
+      "title": "Vela aromática de panetone para o Natal | AlquiVerde",
+      "noindex": true
+    }
+  ]
+}

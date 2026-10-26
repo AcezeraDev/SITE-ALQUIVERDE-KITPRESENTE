@@ -1,0 +1,18 @@
+.product-controls[hidden] { display: none !important; }
+.product-controls { position: absolute; z-index: 5; bottom: 6%; left: 50%; translate: -50% 0; display: grid; justify-items: center; gap: 13px; width: max-content; max-width: 94%; color: #514529; }
+.product-controls__hint { font: 500 9px/1.4 var(--sans, sans-serif); letter-spacing: .15em; text-transform: uppercase; pointer-events: none; }
+.product-controls__buttons { display: flex; gap: 6px; align-items: center; }
+.product-controls button { position: relative; isolation: isolate; display: flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; padding: 0 17px; border: 1px solid #c9b78b; border-radius: 99px; background: #faf7ec; color: #514529; font: 500 12px var(--sans, sans-serif); cursor: pointer; overflow: hidden; }
+.product-controls button::before { content: ''; position: absolute; z-index: -1; inset: 0; background: #ece4cb; opacity: 0; transition: opacity 160ms linear; }
+.product-controls button:hover::before { opacity: 1; }
+.product-controls button:focus-visible { outline: 2px solid #752f3b; outline-offset: 4px; }
+.product-controls button:active { background: #e5d9b8; }
+.product-controls__dot { width: 5px; height: 5px; border-radius: 50%; background: #93804b; }
+.product-controls button svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.product-controls [data-product="replay"] { width: 44px; padding: 0; }
+.product-controls [aria-expanded="true"] svg { rotate: 180deg; }
+.has-product-controls .kp-hero__badge, .has-product-controls > .kit__badge { display: none; }
+.stage:has(.has-product-controls) > .stage__hint { display: none; }
+.kp-hero__visual:not(.is-3d) > .product-controls, .stage:not(.gl-ready) .product-controls, .kit:not(.gl-ready) .product-controls { visibility: hidden; }
+@media (max-width: 600px) { .product-controls { bottom: 3%; gap: 8px; } .product-controls__hint { font-size: 8px; letter-spacing: .1em; } }
+@media (prefers-reduced-motion: reduce) { .product-controls button::before { transition: none; } }

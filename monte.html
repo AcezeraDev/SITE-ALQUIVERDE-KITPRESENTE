@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (() => {
+      document.documentElement.classList.add('js');
+      const mobile = matchMedia('(max-width: 767px)').matches;
+      let light = mobile || matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData === true;
+      try {
+        const saved = localStorage.getItem('alquiverde:modo-leve');
+        if (saved !== null) light = saved === 'true';
+      } catch {}
+      const choice = new URLSearchParams(location.search).get('leve');
+      if (choice === '1' || choice === '0') {
+        light = choice === '1';
+        try { localStorage.setItem('alquiverde:modo-leve', String(light)); } catch {}
+      }
+      document.documentElement.classList.toggle('is-light', light);
+      if (new URLSearchParams(location.search).has('abertura')) document.documentElement.classList.add('has-intro');
+    })();
+  </script>
+  <title>Monte o seu kit · AlquiVerde</title>
+  <meta name="description" content="Monte o seu kit de Natal AlquiVerde: escolha a caixa de 3, 6 ou 9 sabonetes vegetais, os sabonetes e os extras, e veja tudo em 3D." />
+  <meta name="theme-color" content="#752f3b" />
+  <link rel="preload" href="/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='m32 3 6 22 23 7-23 6-6 23-6-23L3 32l23-7z' fill='%23b39360'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <link rel="stylesheet" href="/src/monte.css" />
+</head>
+<body class="mk">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__label">ver</span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="announcement" aria-label="Avisos">
+    <div class="announcement__track">
+      <span>O encanto do Natal, em cada detalhe.</span><i>✳︎</i>
+      <span>Kits montados à mão, prontos para presentear.</span><i>✳︎</i>
+      <span>Sabonetes vegetais · essências · cuidados naturais.</span><i>✳︎</i>
+      <span>Presentes para empresas: fale com a gente.</span><i>✳︎</i>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <a class="brand" href="/" aria-label="AlquiVerde, voltar para a página inicial">
+      <img src="/logo-alquiverde.webp" alt="AlquiVerde · cosméticos naturais" width="735" height="350" />
+    </a>
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="/#colecao" data-magnetic>Kits de Natal</a>
+      <a href="/monte.html" class="is-active" aria-current="page" data-magnetic>Monte o seu</a>
+      <a href="/#ingredientes" data-magnetic>Ingredientes</a>
+      <a href="/#empresas" data-magnetic>Para empresas</a>
+    </nav>
+    <a class="bag-btn" href="/?sacola" data-magnetic aria-label="Abrir a sacola de presentes">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+      <span>Sacola</span>
+      <b class="bag-count" id="bagCount" aria-live="polite">0</b>
+    </a>
+  </header>
+
+  <main id="conteudo">
+    <section class="mk-head" aria-labelledby="mkTitle">
+      <nav class="kp-crumbs" aria-label="Você está em">
+        <a href="/">Início</a><span aria-hidden="true">/</span><span aria-current="page">Monte o seu kit</span>
+      </nav>
+      <p class="eyebrow">Monte o seu kit</p>
+      <h1 id="mkTitle" class="mk-title">Monte seu kit <em>de sabonetes.</em></h1>
+      <p class="mk-sub">Escolha a caixa, os sabonetes e os extras. Cada escolha cai na caixa em 3D. Quando estiver do seu jeito, é só fechar com o laço.</p>
+    </section>
+
+    <section class="mk-builder" aria-label="Montador de kit">
+      <div class="mk-stage" data-cursor="girar">
+        <canvas class="mk-stage__gl" id="mkGL" role="img" aria-label="Caixa do kit em 3D. Arraste ou use as setas para girar."></canvas>
+        <p class="mk-stage__hint" aria-hidden="true"><span>↻</span> arraste para girar</p>
+        <p class="mk-stage__count" id="mkCount" aria-live="polite"></p>
+      </div>
+
+      <div class="mk-panel" id="mkPanel"><div class="seo-help"><h2>Como montar seu presente</h2><ol><li>Escolha uma caixa com 3, 6 ou 9 sabonetes.</li><li>Combine as variedades de sabonetes vegetais.</li><li>Adicione os extras que preferir e confira a composição.</li></ol><p>O montador interativo precisa de JavaScript. Você também pode <a href="/#colecao">conhecer os kits prontos</a> e <a href="https://wa.me/5511990007047">falar com a AlquiVerde pelo WhatsApp</a>.</p></div></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__big" aria-hidden="true"><span>Carinho que</span> <em>se embrulha.</em></p>
+    <div class="footer__row">
+      <span>AlquiVerde · Cosméticos naturais · Natal 2026</span>
+      <span class="footer__note">Conceito interativo · preços em breve</span>
+      <a href="/#colecao" class="text-link">Ver os kits prontos <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
+    </div>
+  </footer>
+
+  <div class="mk-toast" id="mkToast" role="status" aria-live="polite" hidden></div>
+
+  <script type="module" src="/src/monte.js"></script>
+</body>
+</html>

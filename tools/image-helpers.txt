@@ -1,0 +1,34 @@
+export function imageSourceSet(src) {
+  if (!IMAGE_SIZES[src]) return '';
+  const candidates = [480, 800].map((w) => [w, '/responsive' + src.replace(/\.webp$/, '-' + w + '.webp')])
+    .filter(([, path]) => IMAGE_SIZES[path]);
+  if (!candidates.length) return '';
+  return [...candidates.map(([w, path]) => path + ' ' + w + 'w'), src + ' ' + IMAGE_SIZES[src][0] + 'w'].join(', ');
+}
+
+export function setImageSource(img, src) {
+  img.src = src;
+  const srcset = imageSourceSet(src);
+  if (srcset) {
+    img.srcset = srcset;
+    img.sizes ||= '(max-width: 767px) 90vw, 50vw';
+  } else img.removeAttribute('srcset');
+  if (IMAGE_SIZES[src]) { img.width = IMAGE_SIZES[src][0]; img.height = IMAGE_SIZES[src][1]; }
+}
+
+export function sizeImages(html) {
+  return html.replace(/<img\b[^>]*>/g, (tag) => {
+    const src = tag.match(/\bsrc="([^"]+)"/)?.[1];
+    const size = IMAGE_SIZES[src];
+    if (!size) return tag;
+    let attrs = /\bwidth=/.test(tag) ? '' : ' width="' + size[0] + '" height="' + size[1] + '"';
+    const srcset = imageSourceSet(src);
+    const sizes = /class="[^"]*(?:hero__kit-img|kp-hero__img)/.test(tag)
+      ? '(max-width: 767px) 65vw, 45vw'
+      : /(?:brand|logo-alquiverde)/.test(tag) ? '180px'
+      : /kp-card__/.test(tag) ? '(max-width: 767px) 45vw, 25vw'
+      : '(max-width: 767px) 90vw, 50vw';
+    if (srcset && !/\bsrcset=/.test(tag)) attrs += ' srcset="' + srcset + '"' + (/\bsizes=/.test(tag) ? '' : ' sizes="' + sizes + '"');
+    return tag.replace(/\s*\/?>$/, attrs + ' />');
+  });
+}

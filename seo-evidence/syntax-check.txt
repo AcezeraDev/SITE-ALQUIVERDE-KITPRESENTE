@@ -1,0 +1,5 @@
+
+> alquiverde-natal@0.1.0 lint
+> node tools/check-js.mjs
+
+45 JavaScript modules checked for syntax. This is not a TypeScript typecheck.

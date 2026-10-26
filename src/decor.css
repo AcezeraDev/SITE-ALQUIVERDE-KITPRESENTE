@@ -1,0 +1,30 @@
+/* Decoração natalina das seções (decor.js) */
+.has-sdecor { position: relative; isolation: isolate; }
+.sdecor { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.ritual__pin > .sdecor { z-index: 1; } /* acima dos fundos do ritual, abaixo do texto (z 2) */
+.corp > .sdecor { z-index: 1; } /* acima da seda e da trama escuras */
+.corp.has-sdecor .corp__inner { position: relative; z-index: 2; }
+.sdecor__i { position: absolute; transform: rotate(var(--rot)) scaleX(var(--sx)); }
+.sdecor__i > svg { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 10px 14px rgba(60, 26, 32, .16));
+  animation: decor-float 5.4s ease-in-out var(--t) infinite alternate; }
+.sdecor__i--hang1 > svg, .sdecor__i--hang2 > svg, .sdecor__i--hang3 > svg { transform-origin: 50% 0; animation-name: decor-swing; animation-duration: 5s; }
+.sdecor__i--hang2 > svg { animation-duration: 4.3s; }
+.sdecor__i--sprig > svg, .sdecor__i--pine > svg { transform-origin: 85% 100%; animation-name: decor-sway; animation-duration: 6.4s; }
+.sdecor__i--anise > svg { animation: decor-spin 34s linear infinite; }
+.sdecor__i--spark > svg { fill: #b39360; filter: none; animation: decor-twinkle 3.6s ease-in-out var(--t) infinite; }
+.corp .sdecor__i--spark > svg { fill: #d8c193; }
+.sdecor.is-off * { animation-play-state: paused !important; }
+
+/* mesmas animações do hero (repetidas aqui porque kit.html e monte.html não carregam style.css inteiro) */
+@keyframes decor-swing { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+@keyframes decor-sway { from { transform: rotate(-3deg); } to { transform: rotate(2.5deg); } }
+@keyframes decor-float { from { transform: translateY(0) rotate(0); } to { transform: translateY(-12px) rotate(-2deg); } }
+@keyframes decor-spin { to { transform: rotate(360deg); } }
+@keyframes decor-twinkle { 0%, 100% { transform: scale(.35) rotate(0); opacity: .25; } 50% { transform: scale(1) rotate(45deg); opacity: 1; } }
+
+@media (max-width: 760px) {
+  .sdecor__i:not([class*="--hang"]):not(.sdecor__i--spark) { display: none; }
+  .sdecor__i[class*="--hang"] { scale: .7; transform-origin: 50% 0; }
+}
+@media (prefers-reduced-motion: reduce) { .sdecor * { animation: none !important; } }
+html.is-light .sdecor * { animation: none !important; }

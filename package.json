@@ -1,0 +1,33 @@
+{
+  "name": "alquiverde-natal",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5180 --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --port 5181",
+    "images:sizes": "node tools/image-sizes.mjs",
+    "prebuild": "node tools/optimize-images.mjs && node tools/image-sizes.mjs",
+    "lint": "node tools/check-js.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node tools/browser-check.mjs",
+    "audit:html": "node tools/audit-html.mjs",
+    "images:optimize": "node tools/optimize-images.mjs && node tools/image-sizes.mjs"
+  },
+  "dependencies": {
+    "gsap": "3.13.0",
+    "lenis": "1.3.4",
+    "three": "0.178.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "image-size": "^2.0.4",
+    "lighthouse": "^13.5.0",
+    "linkedom": "^0.18.14",
+    "playwright": "^1.64.1",
+    "sharp": "^0.35.5",
+    "subset-font": "^2.4.0",
+    "vite": "^7.3.7"
+  }
+}

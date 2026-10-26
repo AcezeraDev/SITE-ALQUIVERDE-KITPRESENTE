@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (() => {
+      document.documentElement.classList.add('js');
+      const mobile = matchMedia('(max-width: 767px)').matches;
+      let light = mobile || matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData === true;
+      try {
+        const saved = localStorage.getItem('alquiverde:modo-leve');
+        if (saved !== null) light = saved === 'true';
+      } catch {}
+      const choice = new URLSearchParams(location.search).get('leve');
+      if (choice === '1' || choice === '0') {
+        light = choice === '1';
+        try { localStorage.setItem('alquiverde:modo-leve', String(light)); } catch {}
+      }
+      document.documentElement.classList.toggle('is-light', light);
+      if (new URLSearchParams(location.search).has('abertura')) document.documentElement.classList.add('has-intro');
+    })();
+  </script>
+  <title>Kit de Natal · AlquiVerde</title>
+  <meta name="description" content="Conheça cada produto que vem no kit de Natal AlquiVerde: sabonetes vegetais, essências e cuidados naturais." />
+  <meta name="theme-color" content="#752f3b" />
+  <link rel="preload" href="/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='m32 3 6 22 23 7-23 6-6 23-6-23L3 32l23-7z' fill='%23b39360'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <link rel="stylesheet" href="/src/kit.css" />
+</head>
+<body class="kp">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__label">ver</span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- cortina de entrada: as duas abas do papel se abrem (continuação do preloader da landing) -->
+  <div class="kp-curtain" aria-hidden="true"><span></span><span></span></div>
+
+  <div class="announcement" aria-label="Avisos">
+    <div class="announcement__track">
+      <span>O encanto do Natal, em cada detalhe.</span><i>✳︎</i>
+      <span>Kits montados à mão, prontos para presentear.</span><i>✳︎</i>
+      <span>Sabonetes vegetais · essências · cuidados naturais.</span><i>✳︎</i>
+      <span>Presentes para empresas: fale com a gente.</span><i>✳︎</i>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <a class="brand" href="/" aria-label="AlquiVerde, voltar para a página inicial">
+      <img src="/logo-alquiverde.webp" alt="AlquiVerde · cosméticos naturais" width="735" height="350" />
+    </a>
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="/#colecao" data-magnetic>Kits de Natal</a>
+      <a href="/monte.html" data-magnetic>Monte o seu</a>
+      <a href="/#ritual" data-magnetic>O ritual</a>
+      <a href="/#ingredientes" data-magnetic>Ingredientes</a>
+      <a href="/#empresas" data-magnetic>Para empresas</a>
+    </nav>
+    <a class="bag-btn" href="/#colecao" data-magnetic aria-label="Ver todos os kits de Natal">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v13H4zM4 7l2-3h12l2 3M12 7v13"/></svg>
+      <span>Todos os kits</span>
+    </a>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+    <div id="kitRoot"><!-- gerado em kitPage.js --></div>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__big" aria-hidden="true"><span>Carinho que</span> <em>se embrulha.</em></p>
+    <div class="footer__row">
+      <span>AlquiVerde · Cosméticos naturais · Natal 2026</span>
+      <span class="footer__note" id="footNote">Conceito interativo · nomes dos kits provisórios</span>
+      <a href="/#colecao" class="text-link">Ver todos os kits <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/kitPage.js"></script>
+</body>
+</html>

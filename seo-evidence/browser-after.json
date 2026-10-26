@@ -1,0 +1,29 @@
+{
+  "base": "http://127.0.0.1:5182",
+  "checks": [
+    "HTML without JavaScript: home and product, 390px",
+    "HTML without JavaScript: home and product, 1440px",
+    "Mobile: automatic light mode, no Three.js download, accessible menu",
+    "All 12 products: HTTP 200, heading, accordion, no horizontal overflow",
+    "Product variants: content, URL and responsive image stay in sync",
+    "Builder → box closure → bag persists across navigation",
+    "Corporate form: invalid input validation remains functional",
+    "Desktop: full collection rail and product 3D interface initialize",
+    "Local HTTP: unknown paths return 404; legacy query has one 301 preserving variant"
+  ],
+  "errors": [],
+  "accessibility": [
+    {
+      "path": "/",
+      "violations": []
+    },
+    {
+      "path": "/kits/caixa-prata/",
+      "violations": []
+    },
+    {
+      "path": "/monte.html",
+      "violations": []
+    }
+  ]
+}

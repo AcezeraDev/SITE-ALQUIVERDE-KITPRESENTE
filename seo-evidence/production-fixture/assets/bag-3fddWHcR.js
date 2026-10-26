@@ -1,0 +1,1 @@
+const r="alquiverde:sacola";function e(){try{const t=JSON.parse(localStorage.getItem(r)||"[]");return Array.isArray(t)?t:[]}catch{return[]}}function s(t){try{localStorage.setItem(r,JSON.stringify(t))}catch{}}function n(t){const a=e();return a.push(t),s(a),a.length}export{n as a,e as l,s};

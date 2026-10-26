@@ -1,0 +1,94 @@
+TAP version 13
+# Subtest: production, preview and invalid URL indexation controls
+ok 1 - production, preview and invalid URL indexation controls
+  ---
+  duration_ms: 2.0334
+  type: 'test'
+  ...
+# Subtest: caixa-prata: every variant renders full content, real assets, stable metadata
+ok 2 - caixa-prata: every variant renders full content, real assets, stable metadata
+  ---
+  duration_ms: 28.2073
+  type: 'test'
+  ...
+# Subtest: laco-de-natal: every variant renders full content, real assets, stable metadata
+ok 3 - laco-de-natal: every variant renders full content, real assets, stable metadata
+  ---
+  duration_ms: 12.3399
+  type: 'test'
+  ...
+# Subtest: feliz-natal: every variant renders full content, real assets, stable metadata
+ok 4 - feliz-natal: every variant renders full content, real assets, stable metadata
+  ---
+  duration_ms: 69.7671
+  type: 'test'
+  ...
+# Subtest: laco-tropical: every variant renders full content, real assets, stable metadata
+ok 5 - laco-tropical: every variant renders full content, real assets, stable metadata
+  ---
+  duration_ms: 13.652
+  type: 'test'
+  ...
+# Subtest: especiarias-de-natal: every variant renders full content, real assets, stable metadata
+ok 6 - especiarias-de-natal: every variant renders full content, real assets, stable metadata
+  ---
+  duration_ms: 25.4401
+  type: 'test'
+  ...
+# Subtest: quarteto-de-aromas: every variant renders full content, real assets, stable metadata
+ok 7 - quarteto-de-aromas: every variant renders full content, real assets, stable metadata
+  ---
+  duration_ms: 9.3295
+  type: 'test'
+  ...
+# Subtest: aromas-do-jardim: every variant renders full content, real assets, stable metadata
+ok 8 - aromas-do-jardim: every variant renders full content, real assets, stable metadata
+  ---
+  duration_ms: 9.9989
+  type: 'test'
+  ...
+# Subtest: aroma-dourado: every variant renders full content, real assets, stable metadata
+ok 9 - aroma-dourado: every variant renders full content, real assets, stable metadata
+  ---
+  duration_ms: 8.8398
+  type: 'test'
+  ...
+# Subtest: raio-de-sol: every variant renders full content, real assets, stable metadata
+ok 10 - raio-de-sol: every variant renders full content, real assets, stable metadata
+  ---
+  duration_ms: 17.9761
+  type: 'test'
+  ...
+# Subtest: presente-variado: every variant renders full content, real assets, stable metadata
+ok 11 - presente-variado: every variant renders full content, real assets, stable metadata
+  ---
+  duration_ms: 7.7677
+  type: 'test'
+  ...
+# Subtest: oleo-de-semente-de-uva: every variant renders full content, real assets, stable metadata
+ok 12 - oleo-de-semente-de-uva: every variant renders full content, real assets, stable metadata
+  ---
+  duration_ms: 7.6045
+  type: 'test'
+  ...
+# Subtest: vela-de-panetone: every variant renders full content, real assets, stable metadata
+ok 13 - vela-de-panetone: every variant renders full content, real assets, stable metadata
+  ---
+  duration_ms: 27.8349
+  type: 'test'
+  ...
+# Subtest: variant input is clamped and markup serialization prevents script injection
+ok 14 - variant input is clamped and markup serialization prevents script injection
+  ---
+  duration_ms: 17.7942
+  type: 'test'
+  ...
+1..14
+# tests 14
+# suites 0
+# pass 14
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 600.0731
