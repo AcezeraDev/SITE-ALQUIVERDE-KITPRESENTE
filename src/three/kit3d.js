@@ -3,6 +3,7 @@ import { createKitViewer } from './productViewer.js';
 // Kits em 3D a partir das fotos ortogonais (frente, verso, laterais) + vitrine giratória leve.
 // Proporções medidas nas próprias fotos (altura = 2.1 unidades).
 import * as THREE from 'three';
+import { textureLoader, sharedEnvironment } from './gifts.js';
 
 export const KIT_MODELS = {
   // window: retângulo da janela de acetato na frente [x0, y0, x1, y1] em fração da face
@@ -44,7 +45,7 @@ export const KIT_MODELS = {
   'oleo-uva-dourado': { w: 1.17, h: 2.1, d: 0.53, faces: { front: 'front', back: 'back', right: 'right', left: 'left', top: 'top', bottom: 'bottom' }, window: [0.04, 0.02, 0.96, 0.98], edge: '#cdb36a', gold: true },
 };
 
-const loader = new THREE.TextureLoader();
+const loader = textureLoader;
 function tex(url, renderer, mirror = false) {
   // envia para a placa de vídeo assim que a imagem chega (evita o soluço no 1º quadro da caixa)
   const t = loader.load(url, () => { if (!t.userData.disposed) renderer.initTexture(t); });
@@ -70,25 +71,24 @@ function labelTex(text, mirror) {
 const studios = new WeakMap();
 function studioEnv(renderer) {
   if (studios.has(renderer)) return studios.get(renderer).texture;
-  const s = new THREE.Scene();
-  s.add(new THREE.Mesh(new THREE.BoxGeometry(12, 12, 12), new THREE.MeshBasicMaterial({ color: '#77746a', side: THREE.BackSide })));
-  const panel = (w, h, k, color, x, y, z) => {
-    const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(k), side: THREE.DoubleSide }));
-    p.position.set(x, y, z); p.lookAt(0, 0, 0); s.add(p);
-  };
-  panel(7, 3.5, 5, '#fff2dc', -2.5, 5, 2.5); // principal: em cima, à esquerda
-  panel(1.2, 7, 4, '#ffe4bc', 5.5, 0.5, 1.5); // tira vertical à direita: risca de luz nas quinas
-  panel(9, 6, 1.15, '#ffe9c6', 0, 0.5, 5.95); // rebatedor largo: nenhum ângulo fica sem brilho
-  panel(2.2, 7, 3.2, '#fff6ea', -1.9, 0.8, 5.6); // frente (atrás da câmera): faixas verticais que varrem a face ao girar
-  panel(1.2, 5, 1.8, '#ffe8c4', 2.6, 1.5, 5.2);
-  panel(7, 1.4, 2.4, '#ffd29a', -1, -1, -5.8); // contraluz quente
-  panel(10, 10, 0.8, '#b08e62', 0, -5.9, 0); // chão: rebate quente embaixo
-  const generator = new THREE.PMREMGenerator(renderer);
-  const target = generator.fromScene(s, 0.08);
-  generator.dispose();
-  s.traverse((object) => { object.geometry?.dispose(); object.material?.dispose(); });
-  studios.set(renderer, target);
-  return target.texture;
+  const env = sharedEnvironment(renderer, 'studio', () => {
+    const s = new THREE.Scene();
+    s.add(new THREE.Mesh(new THREE.BoxGeometry(12, 12, 12), new THREE.MeshBasicMaterial({ color: '#77746a', side: THREE.BackSide })));
+    const panel = (w, h, k, color, x, y, z) => {
+      const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: new THREE.Color(color).multiplyScalar(k), side: THREE.DoubleSide }));
+      p.position.set(x, y, z); p.lookAt(0, 0, 0); s.add(p);
+    };
+    panel(7, 3.5, 5, '#fff2dc', -2.5, 5, 2.5); // principal: em cima, à esquerda
+    panel(1.2, 7, 4, '#ffe4bc', 5.5, 0.5, 1.5); // tira vertical à direita: risca de luz nas quinas
+    panel(9, 6, 1.15, '#ffe9c6', 0, 0.5, 5.95); // rebatedor largo: nenhum ângulo fica sem brilho
+    panel(2.2, 7, 3.2, '#fff6ea', -1.9, 0.8, 5.6); // frente (atrás da câmera): faixas verticais que varrem a face ao girar
+    panel(1.2, 5, 1.8, '#ffe8c4', 2.6, 1.5, 5.2);
+    panel(7, 1.4, 2.4, '#ffd29a', -1, -1, -5.8); // contraluz quente
+    panel(10, 10, 0.8, '#b08e62', 0, -5.9, 0); // chão: rebate quente embaixo
+    return s;
+  }, 0.08);
+  studios.set(renderer, env);
+  return env.texture;
 }
 
 function releaseStudio(renderer) {

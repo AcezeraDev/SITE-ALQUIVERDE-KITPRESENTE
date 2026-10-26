@@ -3,9 +3,8 @@ import { fallbackScene } from './fallback.js';
 // (fotos em pé, enfileiradas no fundo). Ao fechar, a tampa desce, a fita cruza e o laço aparece.
 import * as THREE from 'three';
 import { gsap } from 'gsap';
-import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
-import { paperTexture, makeRenderer } from './gifts.js';
+import { paperTexture, makeRenderer, textureLoader, roomEnvironment } from './gifts.js';
 import { makeSoap, SOAP_SIZE } from './soap3d.js';
 import { satin, satinBow } from './unbox.js';
 
@@ -46,8 +45,7 @@ export function initBuilder(canvas, { reduced = false } = {}) {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const scene = new THREE.Scene();
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environment = roomEnvironment(renderer).texture;
   scene.environmentIntensity = 0.5;
   scene.add(new THREE.HemisphereLight('#fff6e8', '#5b3434', 0.7));
   const key = new THREE.DirectionalLight('#ffe9c9', 2.1);
@@ -188,7 +186,7 @@ export function initBuilder(canvas, { reduced = false } = {}) {
   }
 
   /* ---------- extras (fotos em pé, no fundo da caixa) ---------- */
-  const loader = new THREE.TextureLoader();
+  const loader = textureLoader;
   const texByUrl = new Map();
   function photoTex(url) {
     if (texByUrl.has(url)) return texByUrl.get(url);

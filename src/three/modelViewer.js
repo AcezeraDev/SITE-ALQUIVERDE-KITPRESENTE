@@ -2,8 +2,7 @@ import { fallbackScene } from './fallback.js';
 // Modelos 3D prontos (GLB feitos no Blender — frascos, vela): carregar, normalizar e mostrar numa vitrine que gira.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
-import { makeRenderer } from './gifts.js';
+import { makeRenderer, roomEnvironment } from './gifts.js';
 
 const loader = new GLTFLoader();
 const cache = new Map();
@@ -43,7 +42,7 @@ export function initModelViewer(canvas, url, { reduced = false } = {}) {
   renderer.toneMapping = THREE.NeutralToneMapping;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
   const scene = new THREE.Scene();
-  scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environment = roomEnvironment(renderer).texture;
   scene.environmentIntensity = 0.7;
   scene.add(new THREE.HemisphereLight('#fff6e6', '#6b4a3a', 0.5));
   const key = new THREE.DirectionalLight('#fff0dc', 1.6); key.position.set(-3, 4, 5); scene.add(key);

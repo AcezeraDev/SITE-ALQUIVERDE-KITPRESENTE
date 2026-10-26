@@ -1,6 +1,5 @@
 import * as THREE from 'three';
-import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
-import { makeRenderer } from './gifts.js';
+import { makeRenderer, roomEnvironment } from './gifts.js';
 import { fallbackScene } from './fallback.js';
 import { advanceSpring, resetSpring, spring } from './productMotion.js';
 import { productControls } from './productControls.js';
@@ -12,11 +11,9 @@ export function createKitViewer(canvas, key, { reduced = false } = {}, models, m
   renderer.toneMapping = THREE.NeutralToneMapping;
   renderer.toneMappingExposure = 1;
   const scene = new THREE.Scene();
-  const pmrem = new THREE.PMREMGenerator(renderer), room = new RoomEnvironment();
-  const environment = pmrem.fromScene(room, .04);
+  const environment = roomEnvironment(renderer);
   scene.environment = environment.texture;
   scene.environmentIntensity = .5;
-  room.dispose(); pmrem.dispose();
   scene.add(new THREE.HemisphereLight('#fffaf0', '#93836b', .8));
   const keyLight = new THREE.DirectionalLight('#fff7e9', 2.1);
   keyLight.position.set(-3, 6, 5);

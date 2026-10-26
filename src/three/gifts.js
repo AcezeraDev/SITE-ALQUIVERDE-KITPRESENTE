@@ -1,5 +1,6 @@
 // Construtores compartilhados: caixa de presente procedural (papel + fita + laço) e poeira dourada.
 import * as THREE from 'three';
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 
 const texCache = new Map();
 
@@ -169,8 +170,77 @@ export function makeRenderer(canvas, { alpha = true, preserveDrawingBuffer = fal
   r.outputColorSpace = THREE.SRGBColorSpace;
   r.toneMapping = THREE.ACESFilmicToneMapping;
   r.toneMappingExposure = 1.05;
+  compileBeforeDraw(r);
   return r;
 }
+
+// Shaders compilados em paralelo (KHR_parallel_shader_compile) antes do 1º desenho de cada cena na tela.
+// Compilar na hora do 1º render travava a página por 1–2 s em cada cena 3D; enquanto compila, o canvas fica vazio
+// (a foto continua por baixo) e, ao terminar, a cena é desenhada uma vez (vale para o modo reduzido, que não tem loop).
+function compileBeforeDraw(r) {
+  const draw = r.render.bind(r);
+  const jobs = new WeakMap(); // cena → true (pronta) | { camera } (compilando)
+  let disposed = false;
+  const dispose = r.dispose.bind(r);
+  r.dispose = () => { disposed = true; dispose(); };
+  r.render = (scene, camera) => {
+    const job = jobs.get(scene);
+    if (job === true || r.getRenderTarget()) return draw(scene, camera); // PMREM e afins desenham em alvo próprio
+    if (job) { job.camera = camera; return; }
+    const next = { camera };
+    jobs.set(scene, next);
+    r.compileAsync(scene, camera).catch(() => {}).then(() => {
+      jobs.set(scene, true);
+      if (!disposed) draw(scene, next.camera);
+    });
+  };
+}
+
+// Reflexo de ambiente (PMREM) gerado uma vez por página e copiado para os outros contextos WebGL: refazer em cada
+// cena custava ~100 ms (compilação + desenho) a cada caixa que nascia. Devolve { texture, dispose }.
+const envData = new Map();
+/** Ambiente de estúdio padrão das cenas (RoomEnvironment). */
+export const roomEnvironment = (renderer) => sharedEnvironment(renderer, 'room', () => new RoomEnvironment(), 0.04);
+
+export function sharedEnvironment(renderer, key, buildScene, sigma) {
+  const cached = envData.get(key);
+  if (cached) {
+    const t = new THREE.DataTexture(cached.data, cached.width, cached.height, THREE.RGBAFormat, THREE.HalfFloatType);
+    Object.assign(t, { mapping: THREE.CubeUVReflectionMapping, minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, generateMipmaps: false, colorSpace: cached.colorSpace, needsUpdate: true });
+    return { texture: t, dispose: () => t.dispose() };
+  }
+  const pmrem = new THREE.PMREMGenerator(renderer), scene = buildScene();
+  const target = pmrem.fromScene(scene, sigma);
+  pmrem.dispose();
+  scene.traverse((o) => { o.geometry?.dispose(); o.material?.dispose(); });
+  const { width, height } = target;
+  const data = new Uint16Array(width * height * 4);
+  if (renderer.extensions.has('EXT_color_buffer_float') || renderer.extensions.has('EXT_color_buffer_half_float')) {
+    renderer.readRenderTargetPixels(target, 0, 0, width, height, data);
+    if (data.some((v) => v)) envData.set(key, { data, width, height, colorSpace: target.texture.colorSpace }); // leitura falhou = fica tudo zero
+  }
+  return { texture: target.texture, dispose: () => target.dispose() };
+}
+
+// Fotos decodificadas fora da thread principal (ImageBitmap): com <img>, a decodificação de cada face (~1 MP)
+// acontecia no envio para a placa de vídeo e travava a rolagem. Mesma assinatura do THREE.TextureLoader.
+const imageLoader = new THREE.TextureLoader();
+const bitmapLoader = typeof createImageBitmap === 'function'
+  ? new THREE.ImageBitmapLoader().setOptions({ imageOrientation: 'flipY', premultiplyAlpha: 'none' })
+  : null;
+export const textureLoader = {
+  load(url, onLoad, onProgress, onError) {
+    if (!bitmapLoader) return imageLoader.load(url, onLoad, onProgress, onError);
+    const t = new THREE.Texture();
+    t.flipY = false; // a imagem já vem virada
+    bitmapLoader.load(url, (bitmap) => {
+      t.image = bitmap;
+      t.needsUpdate = true;
+      onLoad?.(t);
+    }, onProgress, onError);
+    return t;
+  },
+};
 
 export function warmLights(scene, { shadow = false } = {}) {
   scene.add(new THREE.HemisphereLight('#fff4e2', '#6b3a3a', 1.25));

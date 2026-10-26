@@ -3,12 +3,13 @@
 // Faces: frente, verso, lateral do QR (direita), lateral do código de barras (esquerda),
 // topo (frase) e base (lote/validade).
 import * as THREE from 'three';
+import { textureLoader } from './gifts.js';
 
 export const SOAP_KEYS = ['aroeira', 'barbatimao', 'calendula', 'propolis', 'coco', 'acafrao', 'barbatimao-aroeira'];
 export const SOAP_SIZE = { w: 1.8, h: 1.15, d: 0.52 };
 const FULL = new Set(['aroeira', 'barbatimao', 'calendula', 'propolis', 'acafrao', 'barbatimao-aroeira', 'coco']);
 
-const loader = new THREE.TextureLoader();
+const loader = textureLoader;
 const cache = new Map();
 
 function tex(url, anisotropy) {

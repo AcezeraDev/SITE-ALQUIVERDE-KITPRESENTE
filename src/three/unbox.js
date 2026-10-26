@@ -4,9 +4,8 @@ import { fallbackScene } from './fallback.js';
 //  II. Embrulhar  — o escolhido segue girando com a rolagem
 //  III. Sorrir    — ele sobe um pouco e cresce, com luz e poeira dourada
 import * as THREE from 'three';
-import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
-import { paperTexture, makeSparkles, makeRenderer, makeGift } from './gifts.js';
+import { paperTexture, makeSparkles, makeRenderer, makeGift, roomEnvironment } from './gifts.js';
 import { makeSoap, SOAP_SIZE } from './soap3d.js';
 import { makeKitBox, KIT_MODELS } from './kit3d.js';
 
@@ -93,8 +92,7 @@ export function initUnbox(canvas, { onChoice } = {}) {
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.VSMShadowMap;
   const scene = new THREE.Scene();
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environment = roomEnvironment(renderer).texture;
   scene.environmentIntensity = 0.55;
 
   const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 60);

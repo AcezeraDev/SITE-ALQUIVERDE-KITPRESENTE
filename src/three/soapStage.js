@@ -3,8 +3,7 @@ import { fallbackScene } from './fallback.js';
 // troca de sabonete com giro de carta, flutua sobre uma sombra suave.
 import * as THREE from 'three';
 import { gsap } from 'gsap';
-import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
-import { makeRenderer, makeSparkles } from './gifts.js';
+import { makeRenderer, makeSparkles, roomEnvironment } from './gifts.js';
 import { makeSoap, SOAP_SIZE } from './soap3d.js';
 
 export function initSoapStage(canvas, { initial = 'aroeira', reduced = false } = {}) {
@@ -13,8 +12,7 @@ export function initSoapStage(canvas, { initial = 'aroeira', reduced = false } =
   renderer.toneMapping = THREE.NeutralToneMapping;
   renderer.toneMappingExposure = 1.0;
   const scene = new THREE.Scene();
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environment = roomEnvironment(renderer).texture;
   scene.environmentIntensity = 0.45;
   scene.add(new THREE.HemisphereLight('#fff6e6', '#6b4a3a', 0.6));
   const key = new THREE.DirectionalLight('#fff0dc', 1.5);

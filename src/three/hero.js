@@ -1,9 +1,8 @@
 import { fallbackScene } from './fallback.js';
 // Cena do hero: caixas de presente 3D flutuando nas bordas + poeira dourada, com parallax do ponteiro.
 import * as THREE from 'three';
-import { makeGift, makeSparkles, makeRenderer, warmLights } from './gifts.js';
+import { makeGift, makeSparkles, makeRenderer, warmLights, roomEnvironment } from './gifts.js';
 import { makeSoap } from './soap3d.js';
-import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 
 const HERO_SOAPS = { 1: 'aroeira', 3: 'calendula', 5: 'barbatimao', 6: 'coco' };
 
@@ -30,7 +29,7 @@ export function initHero(canvas) {
   const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 60);
   camera.position.set(0, 0, 11);
   warmLights(scene);
-  scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environment = roomEnvironment(renderer).texture;
   scene.environmentIntensity = 0.35;
 
   const world = new THREE.Group();

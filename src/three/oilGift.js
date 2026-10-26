@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { textureLoader } from './gifts.js';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 import { advanceSpring, resetSpring, spring } from './productMotion.js';
 
@@ -107,7 +108,7 @@ function goldDust(width, depth, rimY) {
 
 export function makeOilGift(model, renderer, environment) {
   const group = new THREE.Group();
-  const loader = new THREE.TextureLoader();
+  const loader = textureLoader;
   const pending = [];
   const load = (url, color = false) => {
     let texture;
