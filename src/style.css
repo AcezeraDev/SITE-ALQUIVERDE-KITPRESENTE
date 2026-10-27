@@ -405,7 +405,44 @@ html:not(.js) .ritual__pin { min-height: auto; }
   linear-gradient(90deg, rgba(79, 29, 39, .97) 0%, rgba(79, 29, 39, .88) 45%, rgba(79, 29, 39, .78) 100%), url(/photos/celebracao-fundo.webp); }
 .ritual__spot { position: absolute; inset: 0; pointer-events: none;
   background: radial-gradient(42% 58% at 68% 58%, rgba(255, 246, 226, .95), transparent 70%), radial-gradient(30% 30% at 68% 40%, rgba(214, 185, 124, var(--spot, 0)), transparent 70%); }
-.ritual__gl { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* Palco do "Como funciona" (ritualStage.js): fotos + CSS/SVG, sem WebGL */
+.ritual__stage { position: absolute; z-index: 1; right: clamp(16px, 5vw, 96px); top: 50%; width: min(46vw, 640px); aspect-ratio: 1; translate: 0 -50%; pointer-events: none; }
+.rstage__halo { position: absolute; inset: 6%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 250, 238, .95), rgba(255, 246, 226, .5) 55%, transparent); opacity: .85; }
+.rstage__orbit { position: absolute; inset: 0; width: 100%; height: 100%; fill: none; stroke: var(--gold); stroke-width: 1.4; opacity: .7; animation: rstage-spin 48s linear infinite; }
+.rstage__orbit-b { stroke-dasharray: 2 10; stroke-linecap: round; stroke-width: 2.4; }
+.rstage__ball { position: absolute; width: 7%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #fff9 0 8%, transparent 26%), var(--ball); box-shadow: inset -4px -6px 10px #0004, 0 10px 18px -8px #3c1a2066; animation: rstage-float 5.5s ease-in-out infinite alternate; }
+.rstage__ball::before { content: ''; position: absolute; left: 38%; top: -12%; width: 24%; height: 16%; border-radius: 2px; background: var(--gold); }
+.rstage__ball--1 { --ball: #234a32; left: 12%; top: 16%; }
+.rstage__ball--2 { --ball: #8e2a36; right: 14%; top: 24%; width: 6%; animation-delay: -2s; }
+.rstage__ball--3 { --ball: #c9a55e; right: 7%; top: 56%; width: 8.5%; animation-delay: -3.5s; }
+.rstage__ball--4 { --ball: #6d1f2b; left: 6%; top: 46%; width: 5.5%; animation-delay: -1s; }
+.rstage__plinth { position: absolute; left: 12%; right: 12%; bottom: 7%; height: 15%; border-radius: 50%; background: linear-gradient(180deg, #fbf7ef, #ece2d1); box-shadow: 0 18px 0 -2px #e2d5c0, 0 40px 50px -22px #3c1a2055; }
+.rstage__deck { position: absolute; left: 50%; bottom: 14%; width: 58%; aspect-ratio: 1.05; translate: -50% 0; }
+/* o produto solto sobre o pedestal (as fotos já têm fundo transparente), como na antiga cena 3D */
+.rstage__card { position: absolute; inset: 0; margin: 0; transform-origin: 50% 92%; will-change: transform; }
+.rstage__card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: 50% 100%; filter: drop-shadow(0 24px 22px #2814143d); }
+.rstage__bow { position: absolute; z-index: 5; left: 50%; top: 2%; width: 46%; translate: -50% 0; fill: none; stroke: var(--gold); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 4px 6px #5a3a1240); }
+.rstage__tags { position: absolute; z-index: 6; inset: 0; margin: 0; padding: 0; list-style: none; }
+.rstage__tags li { position: absolute; padding: 9px 16px; border-radius: 99px; background: var(--paper); border: 1px solid #b3936066; box-shadow: 0 14px 26px -16px #3c1a2066; font: 500 13px var(--sans); color: var(--wine); white-space: nowrap; opacity: 0; }
+.rstage__tags li::before { content: ''; display: inline-block; width: 6px; height: 6px; margin-right: 9px; vertical-align: middle; background: var(--gold); transform: rotate(45deg); }
+.rstage__tags li:nth-child(1) { left: 14%; top: 27%; }
+.rstage__tags li:nth-child(2) { right: 0; top: 16%; }
+.rstage__tags li:nth-child(3) { left: 6%; top: 60%; }
+.rstage__tags li:nth-child(4) { right: 2%; top: 50%; }
+.rstage__sparks { position: absolute; z-index: 4; left: 50%; top: 34%; }
+.rstage__sparks i { position: absolute; width: 7px; height: 7px; margin: -3.5px; background: var(--gold-soft); transform: rotate(45deg); opacity: 0; }
+.rstage.is-party .rstage__sparks i { animation: rstage-burst calc(var(--d) * 2.2s) cubic-bezier(.16, 1, .3, 1) infinite; animation-delay: calc(var(--d) * -1s); }
+.rstage.is-paused, .rstage.is-paused * { animation-play-state: paused !important; }
+@media (min-width: 761px) and (max-width: 1100px) {
+  .ritual__copy { max-width: 54vw; }
+  .ritual__stage { right: 1vw; width: 44vw; }
+  .rstage__tags li { padding: 7px 12px; font-size: 11.5px; }
+}
+@keyframes rstage-spin { to { transform: rotate(360deg); } }
+@keyframes rstage-float { from { transform: translateY(-8%); } to { transform: translateY(10%); } }
+@keyframes rstage-burst { 0% { opacity: 0; transform: rotate(var(--a)) translateY(0) scale(.3); } 15% { opacity: 1; } 100% { opacity: 0; transform: rotate(var(--a)) translateY(calc(-90px - var(--d) * 120px)) scale(1); } }
+.ritual.is-dark .rstage__halo { background: radial-gradient(closest-side, rgba(214, 185, 124, .28), transparent); }
+.ritual.is-dark .rstage__orbit { stroke: var(--gold-soft); }
 .ritual__copy { position: relative; z-index: 2; padding: 0 var(--gutter); max-width: 640px; min-width: 0; width: 100%; pointer-events: none; }
 .ritual__words { position: relative; height: 1.15em; font-size: clamp(40px, 5.5vw, 84px); }
 .ritual__words .word { position: absolute; left: 0; top: 0; opacity: 0; white-space: nowrap; }
@@ -452,6 +489,9 @@ html:not(.js) .ritual__pin { min-height: auto; }
   .ritual__bg-layer--1, .ritual__bg-layer--2 { background-position: 30% center; }
   .ritual__spot { background: radial-gradient(70% 40% at 50% 72%, rgba(255, 246, 226, .95), transparent 70%); }
   .ritual__end { white-space: normal; text-align: center; width: 88%; bottom: 4vh; }
+  .ritual__stage { right: auto; left: 50%; top: auto; bottom: 9vh; width: min(94vw, 430px); translate: -50% 0; }
+  .rstage__tags li { padding: 7px 12px; font-size: 11.5px; }
+  .rstage__tags li::before { margin-right: 7px; }
 }
 
 /* ---------- CONVITE: MONTE O SEU KIT ---------- */

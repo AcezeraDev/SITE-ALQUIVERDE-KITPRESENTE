@@ -1,5 +1,5 @@
 import { fallbackScene } from './fallback.js';
-// Cena "O ritual de presentear", guiada pela rolagem (p: 0 → 1): só as embalagens, flutuando sobre o pedestal.
+// Antiga cena 3D do ritual (saiu do site em 27/10, trocada por src/ritualStage.js). Ficam aqui satin/satinBow, usados pelo montador.
 //  I.  Escolher   — os kits reais se revezam (giram como cartas)
 //  II. Embrulhar  — o escolhido segue girando com a rolagem
 //  III. Sorrir    — ele sobe um pouco e cresce, com luz e poeira dourada

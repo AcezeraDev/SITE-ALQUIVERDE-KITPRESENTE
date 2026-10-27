@@ -72,7 +72,7 @@ initHeroColagem($('.hero--colagem'), { reduced, finePointer });
 if (!reduced) $('.hero')?.addEventListener('pointerenter', () => initHeroBg($('.hero__bg')), { once: true });
 const choiceEl = $('#ritualChoice');
 // cenas abaixo da dobra: só nascem quando a seção chega perto (lazyScene)
-const unbox3d = lazyScene($('.ritual'), () => initUnbox($('#unboxGL'), {
+const unbox3d = lazyScene($('.ritual'), () => initUnbox($('#ritualStage'), {
   onChoice: (i) => {
     choiceEl.textContent = RITUAL_KITS[i].name;
     if (!reduced) gsap.fromTo(choiceEl, { yPercent: 60, opacity: 0, filter: 'blur(6px)' }, { yPercent: 0, opacity: 1, filter: 'blur(0px)', duration: 0.5, ease: EASE.enter });
@@ -591,7 +591,7 @@ async function boot() {
     loader.remove();
     lenis?.start();
     heroDecor.start();
-    unbox3d.progress = 1;
+    if (reduced) unbox3d.progress = 1; // sem rolagem guiada: mostra o fim
     initScroll();
     await document.fonts.ready;
     ScrollTrigger.refresh();

@@ -1,4 +1,4 @@
-export { initUnbox, RITUAL_KITS } from './three/unbox.js';
+export { initRitualStage as initUnbox, RITUAL_KITS } from './ritualStage.js';
 export { initSilk } from './three/silk.js';
 export { initSoapStage } from './three/soapStage.js';
 export { initKitViewer } from './three/kit3d.js';
