@@ -414,7 +414,9 @@ html:not(.js) .ritual__pin { min-height: auto; }
 .ritual__desc { position: relative; height: 15.5em; margin-top: 22px; max-width: 40ch; font-size: 17px; color: var(--muted); }
 .ritual__panel { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
 .ritual__panel.is-active { opacity: 1; visibility: visible; }
-.ritual__panel > p:first-child { margin: 0; }
+.ritual__panel > p:first-of-type { margin: 0; }
+.ritual__words-light { display: none; }
+.ritual__panel-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } /* só no Modo leve aparece; aqui fica para leitor de tela */
 .ritual__facts { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; font-size: 15px; color: var(--ink); }
 .ritual__facts li { position: relative; padding-left: 22px; line-height: 1.45; }
 .ritual__facts li::before { content: ''; position: absolute; left: 2px; top: .52em; width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }

@@ -12,28 +12,52 @@ html.is-light .header { backdrop-filter: none; -webkit-backdrop-filter: none; ba
 html.is-light .header.is-hidden { transform: none; }
 html.is-light .marquee__inner { width: auto; flex-wrap: wrap; justify-content: center; gap: 16px 28px; padding-inline: var(--gutter); font-size: clamp(32px, 5vw, 64px); }
 html.is-light .marquee__inner span { white-space: normal; }
-html.is-light .collection__track { display: grid; width: auto; grid-template-columns: 1fr; gap: 32px; padding: 24px var(--gutter) 80px; }
+/* coleção em grade de cartões: dá para comparar os kits lado a lado em vez de rolar um por tela */
 html.is-light .collection__pin { height: auto; display: block; overflow: visible; }
-html.is-light .collection__head { position: relative; width: auto; padding: 72px var(--gutter) 24px; background: none; }
+html.is-light .collection__head { position: relative; width: auto; max-width: 1440px; margin: 0 auto; padding: 88px var(--gutter) 32px; background: none; }
 html.is-light .collection__head h2 { max-width: none; }
-html.is-light .collection__track { height: auto; }
-html.is-light .kit { width: auto; min-width: 0; height: auto; padding: clamp(20px, 4vw, 48px); border: 1px solid color-mix(in srgb, var(--tone) 25%, transparent); border-radius: 28px; background: linear-gradient(125deg, var(--paper), var(--kbg)); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(20px, 5vw, 70px); }
-html.is-light .kit__visual { width: 100%; height: auto; aspect-ratio: 1.05; max-width: 560px; }
+html.is-light .collection__track { display: grid; width: auto; height: auto; max-width: 1440px; margin: 0 auto; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 28px; padding: 0 var(--gutter) 104px; }
+html.is-light .kit { display: flex; flex-direction: column; width: auto; min-width: 0; height: auto; padding: 0; gap: 0; overflow: hidden; border: 1px solid color-mix(in srgb, var(--tone) 22%, transparent); border-radius: 24px; background: var(--paper); box-shadow: 0 22px 44px -32px #3c1a2052; transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out); }
+html.is-light .kit:hover { transform: translateY(-4px); box-shadow: 0 30px 54px -30px #3c1a2066; }
+html.is-light .kit__visual { width: 100%; height: auto; max-width: none; aspect-ratio: 1.18; background: linear-gradient(165deg, var(--paper) 10%, var(--kbg)); border-bottom: 1px solid color-mix(in srgb, var(--tone) 16%, transparent); }
+html.is-light .kit__plinth { inset: 12% 16% 4%; border-radius: 999px 999px 18px 18px; }
+html.is-light .kit__tilt { width: 62%; }
+html.is-light .kit[data-kit="caixa-prata"] .kit__tilt { width: 38%; }
+html.is-light .kit[data-kit="vela-panetone"] .kit__tilt, html.is-light .kit[data-kit="vela-gingerbread"] .kit__tilt { width: 40%; }
+html.is-light .kit__shadow { bottom: 3%; }
+html.is-light .kit__num { left: 18px; top: 12px; font-size: 40px; opacity: .45; }
+html.is-light .kit__info { display: flex; flex-direction: column; flex: 1; padding: 22px 24px 26px; }
+html.is-light .kit h3 { font-size: clamp(24px, 2vw, 30px); margin: 0 0 8px; }
+html.is-light .kit__tag { font-size: 15px; line-height: 1.5; }
+html.is-light .variants { gap: 6px; margin-top: 14px; }
+html.is-light .variant { min-height: 36px; padding: 0 12px; font-size: 12.5px; }
+html.is-light .variant-fixed { margin-top: 12px; font-size: 13px; color: color-mix(in srgb, var(--kink) 70%, var(--muted)); }
+html.is-light .kit__items { margin-top: 16px; max-width: none; }
+html.is-light .kit__items summary { padding: 12px 0; }
+html.is-light .kit__price { margin-top: auto; padding-top: 18px; font-size: 26px; }
+html.is-light .kit__actions { gap: 10px 18px; margin-top: 14px; }
+html.is-light .kit__add { min-height: 46px; padding: 0 18px; gap: 14px; }
+html.is-light .kit__more { font-size: 13px; white-space: normal; }
 html.is-light .kit__badge, html.is-light .kp-hero__badge, html.is-light .soap-stage__hint, html.is-light .mk-stage__hint { display: none !important; }
 html.is-light section[id] { scroll-margin-top: 110px; }
 html.is-light .kit__img, html.is-light .hero__kit-img { filter: drop-shadow(0 14px 16px #28141426); }
-html.is-light .kit__info { padding: 0; }
-html.is-light .ritual__pin { min-height: 580px; height: auto; padding: 80px var(--gutter); grid-template-columns: 1fr 1fr; gap: 56px; }
-html.is-light .ritual__copy { padding: 0; align-self: center; }
-html.is-light .ritual .webgl-fallback__image { position: relative; inset: auto; width: 100%; height: 480px; object-fit: cover; border-radius: 180px 180px 24px 24px; grid-column: 2; grid-row: 1; }
-html.is-light .ritual__copy { grid-column: 1; grid-row: 1; }
-html.is-light .ritual__words { height: auto; font-size: clamp(34px, 4.4vw, 64px); }
-html.is-light .ritual__words .word { position: static; transform: none !important; filter: none !important; display: block; opacity: 1; white-space: normal; }
-html.is-light .ritual__words .word + .word { margin-top: 10px; }
-html.is-light .ritual__desc { height: auto; }
-html.is-light .ritual__panel { position: static; opacity: 1; visibility: visible; margin-top: 28px; }
-html.is-light .ritual__panel:first-child > p:first-child { display: none; }
-html.is-light .ritual__steps, html.is-light .ritual__end, html.is-light .ritual__bg { display: none; }
+/* como funciona: cartões de passo ao lado da foto */
+html.is-light .ritual__pin { display: grid; height: auto; min-height: 0; max-width: 1440px; margin: 0 auto; padding: 104px var(--gutter); grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+html.is-light .ritual .webgl-fallback__image { position: sticky; top: 112px; inset: auto; width: 100%; height: min(660px, 78vh); object-fit: cover; border-radius: 220px 220px 24px 24px; grid-column: 1; grid-row: 1; }
+html.is-light .ritual .webgl-fallback__note { display: none; }
+html.is-light .ritual__copy { grid-column: 2; grid-row: 1; padding: 0; max-width: none; align-self: start; }
+html.is-light .ritual__words { height: auto; font-size: clamp(34px, 4vw, 58px); }
+html.is-light .ritual__words .word { display: none; }
+html.is-light .ritual__words-light { display: block; }
+html.is-light .ritual__desc { display: grid; gap: 16px; height: auto; max-width: none; margin-top: 32px; }
+html.is-light .ritual__panel { position: static; opacity: 1; visibility: visible; transform: none !important; padding: 26px 28px 22px; border: 1px solid var(--line); border-radius: 20px; background: var(--paper); box-shadow: 0 18px 40px -34px #3c1a2052; }
+html.is-light .ritual__panel-title { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; display: flex; align-items: baseline; gap: 14px; margin: 0 0 10px; font: 500 clamp(22px, 1.9vw, 27px)/1.2 var(--serif); color: var(--wine); }
+html.is-light .ritual__panel-title b { font: italic 400 1.2em/1 var(--serif); color: var(--gold); }
+html.is-light .ritual__now { display: none; }
+html.is-light .ritual__facts li, html.is-light .ritual__links { opacity: 1 !important; transform: none !important; }
+html.is-light .ritual__facts { margin-top: 14px; }
+html.is-light .ritual__links { margin-top: 12px; }
+html.is-light .ritual__steps, html.is-light .ritual__end, html.is-light .ritual__bg, html.is-light .ritual__spot { display: none; }
 html.is-light .footer__big { background-position: 0 0; }
 html.is-light .kp-reveal { height: auto; }
 html.is-light .kp-reveal__sticky { position: relative; height: auto; padding: 100px var(--gutter); }
@@ -51,10 +75,30 @@ html.is-light .mk-stage { display: grid; place-items: center; padding: 26px 24px
 @media (max-width: 760px) {
   .mk .mk-toast { bottom: 72px; width: calc(100% - 32px); }
   .experience-toggle { bottom: max(12px, env(safe-area-inset-bottom)); left: 12px; padding: 8px 12px; }
-  html.is-light .kit { grid-template-columns: 1fr; gap: 12px; border-radius: 22px; }
-  html.is-light .collection__track { gap: 24px; }
-  html.is-light .ritual__pin { grid-template-columns: 1fr; padding-block: 64px; gap: 32px; }
-  html.is-light .ritual .webgl-fallback__image { grid-column: 1; grid-row: 2; height: 340px; }
+  html.is-light .marquee__inner { font-size: 26px; gap: 8px 18px; }
+  /* celular: dois kits por linha, só o essencial (foto, nome, preço e botão); o resto fica na página do kit */
+  html.is-light .collection__head { padding: 64px var(--gutter) 22px; }
+  html.is-light .collection__track { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding-bottom: 72px; }
+  html.is-light .kit { border-radius: 18px; }
+  html.is-light .kit:hover { transform: none; }
+  html.is-light .kit__num { left: 10px; top: 6px; font-size: 26px; }
+  html.is-light .kit__tilt { width: 82%; }
+  html.is-light .kit[data-kit="caixa-prata"] .kit__tilt { width: 52%; }
+  html.is-light .kit[data-kit="vela-panetone"] .kit__tilt, html.is-light .kit[data-kit="vela-gingerbread"] .kit__tilt { width: 54%; }
+  html.is-light .kit__info { padding: 12px 12px 14px; }
+  html.is-light .kit h3 { font-size: 18px; margin: 0; }
+  html.is-light .kit__tag, html.is-light .variants, html.is-light .variant-fixed, html.is-light .kit__items { display: none; }
+  html.is-light .kit__price { padding-top: 10px; font-size: 19px; }
+  html.is-light .kit__actions { flex-direction: column; align-items: stretch; gap: 4px; margin-top: 10px; }
+  html.is-light .kit__add { justify-content: center; min-height: 44px; padding: 0 8px; gap: 8px; font-size: 13px; }
+  html.is-light .kit__add svg { display: none; }
+  html.is-light .kit__more { justify-content: center; min-height: 40px; border: 0; text-decoration: underline; text-underline-offset: .2em; font-size: 12.5px; text-align: center; }
+  html.is-light .ritual__pin { grid-template-columns: 1fr; padding-block: 64px; gap: 28px; }
+  html.is-light .ritual .webgl-fallback__image { position: relative; top: auto; grid-column: 1; grid-row: 2; height: 260px; border-radius: 140px 140px 20px 20px; }
+  html.is-light .ritual__copy { grid-column: 1; }
+  html.is-light .ritual__panel { padding: 20px 20px 16px; }
+  html.is-light .ritual__facts li:nth-child(3) { display: list-item; }
+  html.is-light .ritual__facts { font-size: 14px; }
   html.is-light .mk-stage { position: relative; top: auto; min-height: 0; padding: 20px 18px 64px; }
   .light-box { padding: 18px; }
   .light-box.is-wrapped::after { margin: 18px -18px -18px; }

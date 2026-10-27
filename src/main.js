@@ -41,6 +41,7 @@ if (!$('#ingGrid').querySelector('.ing-card')) renderIngredients($('#ingGrid'));
 decorateSections();
 initWhatsApp();
 if (lightMode) {
+  $('.monte-cta .section-sub').textContent = 'Caixa de 3, 6 ou 9 sabonetes, do jeito que você quiser, com essências, óleos e vela. A prévia mostra cada item na caixa.';
   $('.ingredients .section-sub').textContent = 'Sabonetes vegetais de 90 g. Escolha um ingrediente para conhecer os detalhes e encontrar o seu favorito.';
   $$('[data-cursor]').forEach((el) => el.removeAttribute('data-cursor'));
 }
