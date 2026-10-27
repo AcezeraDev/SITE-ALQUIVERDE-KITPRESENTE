@@ -329,8 +329,12 @@ function updateCard(e) {
 corpForm.addEventListener('input', updateCard);
 corpForm.addEventListener('change', updateCard);
 
-corpForm.addEventListener('submit', (e) => {
+// Envio real: o FormSubmit repassa o pedido por e-mail para vendas@ (site estático, sem servidor próprio)
+const CORP_ENDPOINT = 'https://formsubmit.co/ajax/vendas@alquiverde.com.br';
+let corpSending = false;
+corpForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  if (corpSending) return;
   const name = $('#cName'), email = $('#cEmail');
   const errs = [];
   const setErr = (input, errEl, msg) => {
@@ -347,10 +351,39 @@ corpForm.addEventListener('submit', (e) => {
     if (!reduced) gsap.fromTo(errs[0], { x: -10 }, { x: 0, duration: 0.4, ease: 'elastic.out(1, 0.3)' });
     return;
   }
+  const data = new FormData(corpForm);
+  const qty = data.get('qty');
+  if (data.get('_honey')) return; // robô de spam preencheu o campo escondido
+  const btn = $('button[type="submit"]', corpForm), label = $('.btn-shimmer__label', btn);
+  corpSending = true; btn.disabled = true; label.textContent = 'Enviando…';
+  status.textContent = '';
+  try {
+    const res = await fetch(CORP_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        Nome: name.value.trim(),
+        email: email.value.trim(),
+        Empresa: $('#cCompany').value.trim() || '—',
+        'Mensagem do cartão': $('#cMsg').value.trim() || '—',
+        Quantidade: qty,
+        _subject: `Pedido de proposta (kits empresa): ${$('#cCompany').value.trim() || name.value.trim()}`,
+        _replyto: email.value.trim(),
+        _template: 'table',
+        _captcha: 'false',
+      }),
+    });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || String(out.success) === 'false') throw new Error(out.message || res.status);
+  } catch (err) {
+    status.innerHTML = 'Não conseguimos enviar agora. Tente de novo ou <a href="https://wa.me/5511990007047">fale com a Alquiverde pelo WhatsApp</a>.';
+    return;
+  } finally {
+    corpSending = false; btn.disabled = false; label.textContent = 'Quero uma proposta';
+  }
   const first = name.value.trim().split(' ')[0];
-  const qty = new FormData(corpForm).get('qty');
   $('#corpDoneTitle').textContent = `Obrigada, ${first}!`;
-  $('#corpDoneText').textContent = `Pedido de proposta para ${qty.toLowerCase()} presentes. Neste conceito o envio é simulado: na loja, a equipe responde em até 1 dia útil.`;
+  $('#corpDoneText').textContent = `Pedido de proposta para ${qty.toLowerCase()} presentes enviado. A equipe responde no seu e-mail em até 1 dia útil.`;
   const fields = $('.corp__fields', corpForm), done = $('#corpDone');
   const showDone = () => {
     corpForm.style.minHeight = `${corpForm.offsetHeight}px`; // a caixa não encolhe na troca (sem pulo de layout)
