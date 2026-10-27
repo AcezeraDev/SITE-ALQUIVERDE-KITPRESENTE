@@ -75,7 +75,7 @@
     <nav class="nav" aria-label="Navegação principal">
       <a href="#colecao" data-magnetic>Kits de Natal</a>
       <a href="/monte.html" data-magnetic>Monte o seu</a>
-      <a href="#ritual" data-magnetic>O ritual</a>
+      <a href="#ritual" data-magnetic>Como funciona</a>
       <a href="#ingredientes" data-magnetic>Ingredientes</a>
       <a href="#empresas" data-magnetic>Para empresas</a>
     </nav>
@@ -273,20 +273,45 @@
         <div class="ritual__spot" aria-hidden="true"></div>
         <canvas class="ritual__gl" id="unboxGL" aria-hidden="true"></canvas>
         <div class="ritual__copy">
-          <h2 id="ritualTitle" class="ritual__words" aria-label="Escolher. Embrulhar. Fazer alguém sorrir.">
-            <span class="word is-active">Escolher.</span>
-            <span class="word">Embrulhar.</span>
-            <span class="word"><em>Fazer alguém sorrir.</em></span>
+          <p class="eyebrow ritual__eyebrow">Como funciona</p>
+          <h2 id="ritualTitle" class="ritual__words" aria-label="Como funciona: escolha o kit, veja o que vem na caixa e presenteie.">
+            <span class="word is-active" aria-hidden="true">Escolha.</span>
+            <span class="word" aria-hidden="true">Por dentro.</span>
+            <span class="word" aria-hidden="true"><em>Presenteie.</em></span>
           </h2>
-          <div class="ritual__desc" aria-hidden="true">
-            <p class="is-active">Cada kit tem o seu tamanho de abraço. Este aqui é o <b class="ritual__choice" id="ritualChoice">Sabonete Aroeira</b>.</p>
-            <p>A gente acomoda tudo na caixa, fecha a tampa e dá o laço à mão.</p>
-            <p>Na hora de abrir, o presente vira lembrança.</p>
+          <div class="ritual__desc">
+            <div class="ritual__panel is-active">
+              <p>Kit pronto ou caixa montada por você. Girando agora: <b class="ritual__choice" id="ritualChoice">Sabonete Aroeira</b>.</p>
+              <ul class="ritual__facts">
+                <li>Kits prontos de sabonetes, óleos, essências e velas</li>
+                <li>Monte o seu: caixa de 3, 6 ou 9 sabonetes, com extras</li>
+                <li>Do mimo de um item ao kit completo</li>
+              </ul>
+              <p class="ritual__links"><a href="#colecao">Ver os kits</a><a href="/monte.html">Montar o meu</a></p>
+            </div>
+            <div class="ritual__panel">
+              <p>Cada kit mostra a lista completa de itens. O que costuma ir na caixa:</p>
+              <ul class="ritual__facts">
+                <li>Sabonetes vegetais de 90 g, para todos os tipos de pele</li>
+                <li>Óleos essenciais e vegetais, essências, velas e bucha vegetal</li>
+                <li>Caixa com visor e laço de cetim, pronta para entregar</li>
+              </ul>
+              <p class="ritual__links"><a href="#ingredientes">Conhecer os 7 sabonetes</a></p>
+            </div>
+            <div class="ritual__panel">
+              <p>O botão de cada kit leva à loja oficial AlquiVerde, onde a compra é concluída.</p>
+              <ul class="ritual__facts">
+                <li>Preço, frete e prazo confirmados na loja antes de pagar</li>
+                <li>Dúvida sobre um kit? A gente responde no WhatsApp</li>
+                <li>Empresas: cartão com a sua marca e entrega combinada</li>
+              </ul>
+              <p class="ritual__links"><a href="https://wa.me/5511990007047">Falar no WhatsApp</a><a href="#empresas">Presentes para empresas</a></p>
+            </div>
           </div>
           <ol class="ritual__steps" aria-hidden="true">
-            <li class="is-active"><b>01</b><span>Escolha o kit</span></li>
-            <li><b>02</b><span>A gente embrulha</span></li>
-            <li><b>03</b><span>Alguém sorri</span></li>
+            <li class="is-active"><b>01</b><span>Escolher o kit</span></li>
+            <li><b>02</b><span>O que vem na caixa</span></li>
+            <li><b>03</b><span>Comprar e receber</span></li>
             <i class="ritual__bar"><i></i></i>
           </ol>
         </div>

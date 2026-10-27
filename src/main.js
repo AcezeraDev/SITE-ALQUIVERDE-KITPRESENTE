@@ -469,22 +469,25 @@ function initScroll() {
     });
   });
 
-  // Ritual em três atos: escolher → embrulhar → sorrir (a cena 3D lê o progresso)
+  // Como funciona, em três atos: escolher → o que vem → comprar (a cena 3D lê o progresso)
   const words = $$('.ritual__words .word');
-  const descs = $$('.ritual__desc p');
+  const descs = $$('.ritual__panel');
   const steps = $$('.ritual__steps li');
   const ritual = $('.ritual');
   const bgLayers = $$('.ritual__bg-layer');
   let act = 0;
   gsap.set(words.slice(1), { opacity: 0, yPercent: 60, filter: 'blur(8px)' });
-  gsap.set(descs.slice(1), { opacity: 0, y: 14 });
+  gsap.set(descs.slice(1), { autoAlpha: 0, y: 14 });
   const setAct = (i) => {
     if (i === act) return;
     const dir = i > act ? 1 : -1;
     gsap.to(words[act], { opacity: 0, yPercent: -60 * dir, filter: 'blur(10px)', duration: 0.45, ease: EASE.exit, overwrite: true });
     gsap.fromTo(words[i], { opacity: 0, yPercent: 60 * dir, filter: 'blur(10px)' }, { opacity: 1, yPercent: 0, filter: 'blur(0px)', duration: 0.8, ease: EASE.enter, overwrite: true });
-    gsap.to(descs[act], { opacity: 0, y: -10 * dir, duration: 0.3, ease: EASE.exit, overwrite: true });
-    gsap.fromTo(descs[i], { opacity: 0, y: 14 * dir }, { opacity: 1, y: 0, duration: 0.7, delay: 0.1, ease: EASE.soft, overwrite: true });
+    gsap.to(descs[act], { autoAlpha: 0, y: -10 * dir, duration: 0.3, ease: EASE.exit, overwrite: true });
+    gsap.fromTo(descs[i], { autoAlpha: 0, y: 14 * dir }, { autoAlpha: 1, y: 0, duration: 0.7, delay: 0.1, ease: EASE.soft, overwrite: true });
+    // os itens entram um a um, como coisas sendo postas na caixa
+    gsap.fromTo($$('.ritual__facts li, .ritual__links', descs[i]), { opacity: 0, x: -12 }, { opacity: 1, x: 0, stagger: 0.07, duration: 0.6, delay: 0.18, ease: EASE.enter, overwrite: true });
+    descs.forEach((el, j) => el.classList.toggle('is-active', j === i));
     steps.forEach((el, j) => el.classList.toggle('is-active', j === i));
     act = i;
   };

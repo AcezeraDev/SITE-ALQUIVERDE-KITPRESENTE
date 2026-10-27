@@ -410,9 +410,18 @@ html:not(.js) .ritual__pin { min-height: auto; }
 .ritual__words { position: relative; height: 1.15em; font-size: clamp(40px, 5.5vw, 84px); }
 .ritual__words .word { position: absolute; left: 0; top: 0; opacity: 0; white-space: nowrap; }
 .ritual__words .word.is-active { opacity: 1; }
-.ritual__desc { position: relative; height: 5.4em; margin-top: 22px; max-width: 34ch; font-size: 17px; color: var(--muted); }
-.ritual__desc p { position: absolute; inset: 0; opacity: 0; }
-.ritual__desc p.is-active { opacity: 1; }
+.ritual__eyebrow { margin: 0 0 14px; }
+.ritual__desc { position: relative; height: 15.5em; margin-top: 22px; max-width: 40ch; font-size: 17px; color: var(--muted); }
+.ritual__panel { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+.ritual__panel.is-active { opacity: 1; visibility: visible; }
+.ritual__panel > p:first-child { margin: 0; }
+.ritual__facts { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; font-size: 15px; color: var(--ink); }
+.ritual__facts li { position: relative; padding-left: 22px; line-height: 1.45; }
+.ritual__facts li::before { content: ''; position: absolute; left: 2px; top: .52em; width: 7px; height: 7px; background: var(--gold); transform: rotate(45deg); }
+.ritual__links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 22px 0 0; }
+.ritual__links a { pointer-events: auto; display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; font-weight: 600; color: var(--wine); border-bottom: 1px solid currentColor; transition: color .3s, gap .3s var(--ease-out); gap: 6px; }
+.ritual__links a::after { content: '→'; transition: transform .3s var(--ease-out); }
+.ritual__links a:hover::after, .ritual__links a:focus-visible::after { transform: translateX(4px); }
 .ritual__choice { color: var(--wine); font: italic 500 1.35em/1 var(--serif); white-space: nowrap; display: inline-block; }
 .ritual__steps { position: relative; list-style: none; padding: 0 0 0 22px; margin: 26px 0 0; display: grid; gap: 14px; font-size: 14px; }
 .ritual__steps li { display: flex; gap: 14px; align-items: baseline; opacity: .38; transition: opacity .5s, transform .5s var(--ease-out); }
@@ -424,12 +433,19 @@ html:not(.js) .ritual__pin { min-height: auto; }
 .ritual.is-dark .eyebrow { color: var(--gold-soft); }
 .ritual.is-dark .ritual__desc { color: rgba(255, 252, 245, .75); }
 .ritual.is-dark .ritual__choice { color: var(--gold-soft); }
+.ritual.is-dark .ritual__facts { color: var(--paper); }
+.ritual.is-dark .ritual__links a { color: var(--gold-soft); }
 .ritual.is-dark .ritual__spot { background: radial-gradient(42% 58% at 68% 55%, rgba(120, 50, 60, .55), transparent 70%), radial-gradient(30% 34% at 68% 38%, rgba(214, 185, 124, var(--spot, 0)), transparent 70%); }
 @media (max-width: 760px) {
   .ritual__copy { align-self: start; padding-top: 11vh; }
-  .ritual__words { font-size: 42px; height: 2.2em; }
+  .ritual__words { font-size: 42px; height: 1.2em; }
   .ritual__words .word { white-space: normal; }
-  .ritual__desc { font-size: 15px; height: 4.8em; }
+  .ritual__copy { padding-top: 9vh; }
+  .ritual__desc { font-size: 14.5px; height: 12.2em; margin-top: 12px; }
+  .ritual__facts { font-size: 13.5px; gap: 6px; margin-top: 10px; }
+  .ritual__facts li:nth-child(3) { display: none; } /* no celular, dois itens: a cena 3D precisa do espaço de baixo */
+  .ritual__links { margin-top: 6px; gap: 0 18px; flex-wrap: nowrap; }
+  .ritual__links a { font-size: 13px; white-space: nowrap; }
   .ritual__steps { display: none; }
   .ritual__bg-layer--1, .ritual__bg-layer--2 { background-position: 30% center; }
   .ritual__spot { background: radial-gradient(70% 40% at 50% 72%, rgba(255, 246, 226, .95), transparent 70%); }
