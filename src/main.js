@@ -367,7 +367,7 @@ corpForm.addEventListener('submit', async (e) => {
         Empresa: $('#cCompany').value.trim() || '—',
         'Mensagem do cartão': $('#cMsg').value.trim() || '—',
         Quantidade: qty,
-        _subject: `Pedido de proposta (kits empresa): ${$('#cCompany').value.trim() || name.value.trim()}`,
+        _subject: `Pedido Kit Presente (site) – ${$('#cCompany').value.trim() || name.value.trim()} – ${qty} presentes`,
         _replyto: email.value.trim(),
         _template: 'table',
         _captcha: 'false',
