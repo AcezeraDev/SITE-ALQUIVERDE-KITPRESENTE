@@ -329,8 +329,10 @@ function updateCard(e) {
 corpForm.addEventListener('input', updateCard);
 corpForm.addEventListener('change', updateCard);
 
-// Envio real: o FormSubmit repassa o pedido por e-mail para vendas@ (site estático, sem servidor próprio)
-const CORP_ENDPOINT = 'https://formsubmit.co/ajax/vendas@alquiverde.com.br';
+// Envio real: o Web3Forms repassa o pedido por e-mail para vendas@ (site estático, sem servidor próprio).
+// A chave é pública por design: só permite enviar para o e-mail cadastrado nela.
+const CORP_ENDPOINT = 'https://api.web3forms.com/submit';
+const CORP_KEY = 'ac579162-e3de-4fc5-aeb9-a8519078da10';
 let corpSending = false;
 corpForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -362,19 +364,19 @@ corpForm.addEventListener('submit', async (e) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
+        access_key: CORP_KEY,
+        subject: `Pedido Kit Presente (site) – ${$('#cCompany').value.trim() || name.value.trim()} – ${qty} presentes`,
+        from_name: 'Pedido Kit Presente',
+        replyto: email.value.trim(),
         Nome: name.value.trim(),
-        email: email.value.trim(),
+        'E-mail': email.value.trim(),
         Empresa: $('#cCompany').value.trim() || '—',
         'Mensagem do cartão': $('#cMsg').value.trim() || '—',
         Quantidade: qty,
-        _subject: `Pedido Kit Presente (site) – ${$('#cCompany').value.trim() || name.value.trim()} – ${qty} presentes`,
-        _replyto: email.value.trim(),
-        _template: 'table',
-        _captcha: 'false',
       }),
     });
     const out = await res.json().catch(() => ({}));
-    if (!res.ok || String(out.success) === 'false') throw new Error(out.message || res.status);
+    if (!res.ok || !out.success) throw new Error(out.message || res.status);
   } catch (err) {
     status.innerHTML = 'Não conseguimos enviar agora. Tente de novo ou <a href="https://wa.me/5511990007047">fale com a Alquiverde pelo WhatsApp</a>.';
     return;
