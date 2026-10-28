@@ -1,5 +1,12 @@
 # Publicação e manutenção do SEO
 
+## Estado em 28/10/2026
+
+- Domínio definitivo: `https://kitpresentealquiverde.com.br`; `SITE_URL` configurado apenas em Production na Vercel.
+- Os 13 kits foram confirmados como ativos pelo responsável e estão com `draft: false`. O build de produção inclui home, montador e os 13 kits no sitemap (15 URLs).
+- Novos kits ainda devem ter seu estado editorial revisado. `draft: true` mantém uma página fora do sitemap e com `noindex`; previews continuam bloqueados mesmo com domínio configurado.
+- A liberação técnica não comprova indexação pelo Google. Search Console e validação do domínio final continuam necessários.
+
 Este projeto é um catálogo Vite com geração de HTML estático no build. As compras levam à loja AlquiVerde. O formulário corporativo continua sendo uma demonstração e informa isso antes do envio.
 
 ## Primeira publicação na Vercel
@@ -9,7 +16,7 @@ Este projeto é um catálogo Vite com geração de HTML estático no build. As c
 3. A primeira revisão pode ser publicada sem `SITE_URL`: todas as páginas terão `noindex, follow` e o sitemap ficará vazio. Isso é intencional enquanto não existe endereço definitivo.
 4. Defina o domínio público final. Configure **`SITE_URL`**, apenas no ambiente **Production**, com a origem HTTPS exata, sem caminho, parâmetros ou credenciais. Exemplo de formato: `https://seu-dominio-real`.
 5. Faça novo build/deploy após configurar a variável. O HTML passa a incluir canonicals, URLs de compartilhamento, Organization, WebSite, páginas e breadcrumbs com a origem correta. Deploys `preview`/`development` permanecem `noindex` mesmo que recebam a variável.
-6. Os 12 registros de produto em `src/kitPages.js` vieram com `draft: true`. Confirme nomes, conteúdo, imagens, cuidados e publicação na loja; só então remova o `draft` de cada registro aprovado. O próximo build inclui esse kit no sitemap e libera sua indexação.
+6. Revise o estado editorial dos registros em `src/kitPages.js`: os 13 kits atuais foram confirmados como ativos e liberados em 28/10/2026. Para novos registros, confirme conteúdo e publicação na loja antes de definir `draft: false`. O próximo build inclui cada kit aprovado no sitemap e libera sua indexação.
 7. Verifique no domínio final: `/robots.txt`, `/sitemap.xml`, `/kits/caixa-prata/`, `/kit.html?k=caixa-prata`, `/kits/nao-existe/`. A URL antiga deve redirecionar, e a inexistente deve responder HTTP 404. O teste local não comprova o comportamento do edge da Vercel.
 8. Confirme HTTPS, domínio preferido e redirecionamento do domínio alternativo na Vercel. Verifique a propriedade no Search Console, envie o sitemap e use inspeção de URL nas páginas aprovadas.
 9. Rode PageSpeed Insights e o Rich Results Test no domínio final. Reavalie métricas de campo quando houver tráfego suficiente. Resultados de laboratório não comprovam aprovação dos Core Web Vitals em campo.

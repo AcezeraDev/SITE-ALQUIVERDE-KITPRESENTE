@@ -122,7 +122,7 @@ function ESSENCIA_CARE() {
 
 export const KIT_PAGES = {
   'caixa-prata': {
-    slug: 'caixa-prata', kitId: 'caixa-prata', draft: true,
+    slug: 'caixa-prata', kitId: 'caixa-prata', draft: false,
     name: 'Caixa Prata',
     title: 'Kit de Natal AlquiVerde — Caixa Prata com 6 Sabonetes Vegetais de Barbatimão, Calêndula e Aroeira',
     subtitle: 'Caixa prata texturizada com visor e laço verde de cetim, com 6 sabonetes vegetais de 90 g',
@@ -157,7 +157,7 @@ export const KIT_PAGES = {
     other: 'laco-de-natal',
   },
   'laco-de-natal': {
-    slug: 'laco-de-natal', kitId: 'laco', draft: true,
+    slug: 'laco-de-natal', kitId: 'laco', draft: false,
     name: 'Laço de Natal',
     title: 'Kit de Natal AlquiVerde — Laço de Natal com 2 Sabonetes Vegetais, Óleo de Amêndoa Doce e Bucha',
     subtitle: 'Caixa vermelha com laço, 2 sabonetes vegetais de 90 g, óleo de amêndoa doce e bucha vegetal',
@@ -188,7 +188,7 @@ export const KIT_PAGES = {
     other: 'feliz-natal',
   },
   'feliz-natal': {
-    slug: 'feliz-natal', kitId: 'feliz-natal', draft: true,
+    slug: 'feliz-natal', kitId: 'feliz-natal', draft: false,
     video: { src: '/video/montagem-kit.mp4', poster: '/video/montagem-kit-poster.jpg' }, // só este kit tem vídeo da montagem
     name: 'Kits Clássico, Delicado e da Casa',
     title: 'Kit de Natal AlquiVerde — Kit Clássico, Delicado ou da Casa com 4 Sabonetes Vegetais, 2 Essências, Vela Aromática de Panetone e Bucha',
@@ -229,7 +229,7 @@ export const KIT_PAGES = {
     other: 'laco-tropical',
   },
   'laco-tropical': {
-    slug: 'laco-tropical', kitId: 'laco-tropical', draft: true,
+    slug: 'laco-tropical', kitId: 'laco-tropical', draft: false,
     name: 'Laço Tropical',
     title: 'Kit Presente de Natal AlquiVerde — Laço Tropical: Sabonetes Vegetais Barbatimão e Aroeira e Coco, Bucha e Óleo de Semente de Uva',
     subtitle: 'Caixa vermelha metalizada com laço de cetim, 2 sabonetes vegetais de 90 g, bucha vegetal e óleo de semente de uva com vitamina E',
@@ -263,7 +263,7 @@ export const KIT_PAGES = {
     other: 'especiarias-de-natal',
   },
   'especiarias-de-natal': {
-    slug: 'especiarias-de-natal', kitId: 'especiarias', draft: true,
+    slug: 'especiarias-de-natal', kitId: 'especiarias', draft: false,
     name: 'Especiarias de Natal',
     title: 'Kit de Natal AlquiVerde — Especiarias de Natal com 4 Sabonetes Vegetais, Óleos de Canela e Cravo, Vela Aromática de Panetone e Bucha',
     subtitle: 'Caixa vermelha com divisórias, 4 sabonetes vegetais de 90 g, óleos de canela e cravo de 10 mL, vela aromática de panetone e bucha vegetal',
@@ -302,7 +302,7 @@ export const KIT_PAGES = {
     other: 'quarteto-de-aromas',
   },
   'quarteto-de-aromas': {
-    slug: 'quarteto-de-aromas', kitId: 'quarteto-aromas', draft: true,
+    slug: 'quarteto-de-aromas', kitId: 'quarteto-aromas', draft: false,
     name: 'Cinco Aromas',
     title: 'Kit Natal 5 Óleos Essenciais AlquiVerde — Limão Siciliano, Eucalipto, Alecrim, Canela e Cravo 10 mL',
     subtitle: 'Caixa vermelha com visor e laço de cetim, 5 óleos essenciais de 10 mL para perfumar a casa',
@@ -337,7 +337,7 @@ export const KIT_PAGES = {
     other: 'aromas-do-jardim',
   },
   'aromas-do-jardim': {
-    slug: 'aromas-do-jardim', kitId: 'aromas-jardim', draft: true,
+    slug: 'aromas-do-jardim', kitId: 'aromas-jardim', draft: false,
     name: 'Aromas do Jardim',
     title: 'Kit 5 Óleos Essenciais AlquiVerde — Lavanda, Capim Limão, Alecrim, Cravo e Tangerina em Caixa Dourada',
     subtitle: 'Caixa dourada texturizada com laço e 5 óleos essenciais em frascos de vidro âmbar',
@@ -372,7 +372,7 @@ export const KIT_PAGES = {
     other: 'aroma-dourado',
   },
   'aroma-dourado': {
-    slug: 'aroma-dourado', kitId: 'aroma-dourado', draft: true,
+    slug: 'aroma-dourado', kitId: 'aroma-dourado', draft: false,
     name: 'Aroma Dourado',
     title: 'Kit Natal AlquiVerde — Aroma Dourado com Aromatizador Elétrico e Óleo Essencial de Alecrim 10 mL',
     subtitle: 'Caixa dourada com tampa transparente e laço de cetim, aromatizador elétrico de porcelana e óleo essencial de Alecrim de 10 mL',
@@ -404,7 +404,7 @@ export const KIT_PAGES = {
     other: 'raio-de-sol',
   },
   'raio-de-sol': {
-    slug: 'raio-de-sol', kitId: 'raio-de-sol', draft: true,
+    slug: 'raio-de-sol', kitId: 'raio-de-sol', draft: false,
     name: 'Raio de Sol',
     title: 'Kit Natal AlquiVerde — Óleo Essencial de Laranja + Sabonete Vegetal Sortido 90 g, em Caixa Dourada',
     subtitle: 'Caixa dourada com tampa transparente e laço dourado, óleo essencial de Laranja e um sabonete vegetal sortido de 90 g',
@@ -446,7 +446,7 @@ export const KIT_PAGES = {
 
   // ---- Os três abaixo vêm dos descritivos de anúncio (sem preço e sem produto na loja ainda). ----
   'presente-variado': {
-    slug: 'presente-variado', kitId: 'presente-variado', draft: true,
+    slug: 'presente-variado', kitId: 'presente-variado', draft: false,
     name: 'Presente Variado',
     title: 'Kit Presente AlquiVerde — 3 Sabonetes Vegetais Variados de 90 g em Caixa Dourada com Laço',
     subtitle: 'Caixa dourada com visor transparente e laço dourado, com 3 sabonetes vegetais de variedades diferentes',
@@ -479,7 +479,7 @@ export const KIT_PAGES = {
     other: 'oleo-de-semente-de-uva',
   },
   'oleo-de-semente-de-uva': {
-    slug: 'oleo-de-semente-de-uva', kitId: 'oleo-uva', draft: true,
+    slug: 'oleo-de-semente-de-uva', kitId: 'oleo-uva', draft: false,
     name: 'Óleo de Semente de Uva',
     title: 'Óleo de Semente de Uva AlquiVerde, Puro e Natural, em Caixa Dourada para Presente',
     subtitle: 'Óleo vegetal de semente de uva em frasco escuro, dentro de caixa dourada texturizada com tampa transparente',
@@ -507,7 +507,7 @@ export const KIT_PAGES = {
     other: 'vela-de-panetone',
   },
   'vela-de-panetone': {
-    slug: 'vela-de-panetone', kitId: 'vela-panetone', draft: true,
+    slug: 'vela-de-panetone', kitId: 'vela-panetone', draft: false,
     name: 'Vela de Panetone',
     title: 'Vela Aromática de Panetone Alquiverde em Copo de Vidro com Rótulo Natalino',
     subtitle: 'Vela aromática de panetone em copo de vidro com rótulo vermelho natalino, numa caixa transparente',
@@ -533,7 +533,7 @@ export const KIT_PAGES = {
     other: 'vela-gingerbread',
   },
   'vela-gingerbread': {
-    slug: 'vela-gingerbread', kitId: 'vela-gingerbread', draft: true,
+    slug: 'vela-gingerbread', kitId: 'vela-gingerbread', draft: false,
     name: 'Vela Gingerbread',
     title: 'Vela Aromática Gingerbread Alquiverde em Copo de Vidro com Rótulo Natalino',
     subtitle: 'Vela aromática de biscoito de gengibre em copo de vidro com rótulo branco e dourado, numa caixa transparente',
