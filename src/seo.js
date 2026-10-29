@@ -4,10 +4,10 @@ export const escapeHTML = (value) => String(value).replace(/[&<>"']/g, (c) => ({
 export const serializeJSON = (value) => JSON.stringify(value).replace(/</g, '\\u003c');
 
 const TOPICS = {
-  'caixa-prata': 'Kit com 6 sabonetes vegetais Caixa Prata',
-  'laco-de-natal': 'Kit de banho com óleo de amêndoa Laço de Natal',
+  'caixa-prata': 'Kit presente com 6 sabonetes vegetais Caixa Prata',
+  'laco-de-natal': 'Kit presente de banho com óleo de amêndoa Laço de Natal',
   'feliz-natal': 'Kit Clássico de Natal com sabonetes e vela',
-  'laco-tropical': 'Kit de banho com óleo de uva Laço Tropical',
+  'laco-tropical': 'Kit presente de banho com óleo de uva Laço Tropical',
   'especiarias-de-natal': 'Kit de Natal com sabonetes, canela e cravo',
   'quarteto-de-aromas': 'Kit Cinco Aromas para perfumar a casa',
   'aromas-do-jardim': 'Kit Aromas do Jardim em caixa dourada',
@@ -31,8 +31,8 @@ export function kitMetadata(page) {
 }
 
 export const HOME_META = {
-  title: 'Kits de Natal com sabonetes vegetais | AlquiVerde',
-  description: 'Conheça os kits de Natal AlquiVerde com sabonetes vegetais, óleos, essências e velas. Compare os presentes prontos e monte sua combinação.',
+  title: 'Kit presente: sabonetes, aromas e kits de Natal | AlquiVerde',
+  description: 'Escolha seu kit presente AlquiVerde com sabonetes vegetais, óleos, essências e velas. Compare kits de Natal e opções de autocuidado ou monte sua caixa.',
   path: '/', image: '/kits/feliz-aroeira-calendula-angulo.webp',
   imageAlt: 'Kit AlquiVerde em caixa vermelha com sabonetes, essências, vela e bucha vegetal',
 };
@@ -53,7 +53,7 @@ export function seoHead(meta, { siteUrl = '', indexable = false, graph = [] } = 
   ${siteUrl ? `<link rel="canonical" href="${escapeHTML(absolute(meta.path))}" />` : ''}
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
-  <meta property="og:site_name" content="AlquiVerde · Kits de Natal" />
+  <meta property="og:site_name" content="AlquiVerde · Kits para presente" />
   <meta property="og:title" content="${escapeHTML(meta.title)}" />
   <meta property="og:description" content="${escapeHTML(meta.description)}" />
   ${siteUrl ? `<meta property="og:url" content="${escapeHTML(absolute(meta.path))}" />
@@ -72,12 +72,12 @@ export function schemaGraph(meta, siteUrl, page) {
   if (!siteUrl) return [];
   const absolute = (path) => new URL(path, siteUrl).href;
   const organization = { '@type': 'Organization', '@id': 'https://alquiverde.com.br/#organization', name: 'AlquiVerde', url: 'https://alquiverde.com.br/' };
-  const website = { '@type': 'WebSite', '@id': absolute('/#website'), name: 'AlquiVerde · Kits de Natal', url: absolute('/'), inLanguage: 'pt-BR', publisher: { '@id': organization['@id'] } };
+  const website = { '@type': 'WebSite', '@id': absolute('/#website'), name: 'AlquiVerde · Kits para presente', url: absolute('/'), inLanguage: 'pt-BR', publisher: { '@id': organization['@id'] } };
   const webPage = { '@type': page ? 'ItemPage' : meta.path === '/' ? 'CollectionPage' : 'WebPage', '@id': absolute(meta.path), url: absolute(meta.path), name: meta.title, description: meta.description, inLanguage: 'pt-BR', isPartOf: { '@id': website['@id'] } };
   const graph = [organization, website, webPage];
   if (meta.path !== '/') {
     const breadcrumb = { '@type': 'BreadcrumbList', '@id': absolute(`${meta.path}#breadcrumb`), itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Kits de Natal', item: absolute('/') },
+      { '@type': 'ListItem', position: 1, name: 'Kits para presente', item: absolute('/') },
       { '@type': 'ListItem', position: 2, name: page?.name || 'Monte seu kit', item: absolute(meta.path) },
     ] };
     webPage.breadcrumb = { '@id': breadcrumb['@id'] };
