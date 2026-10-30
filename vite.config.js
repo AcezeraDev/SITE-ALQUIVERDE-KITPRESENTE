@@ -5,7 +5,19 @@ import { seoBuild } from './tools/seo-build.mjs';
 // Catálogo multipágina; seoBuild gera os produtos em /kits/<slug>/ no build.
 export default defineConfig(({ mode }) => ({
   appType: 'mpa',
-  plugins: [seoBuild({ ...loadEnv(mode, import.meta.dirname, ''), ...process.env }), {
+  plugins: [{
+    name: 'vercel-web-analytics',
+    apply: 'build',
+    transformIndexHtml: {
+      order: 'post',
+      handler() {
+        return [
+          { tag: 'script', children: 'window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };', injectTo: 'head' },
+          { tag: 'script', attrs: { defer: true, src: '/_vercel/insights/script.js' }, injectTo: 'head' },
+        ];
+      },
+    },
+  }, seoBuild({ ...loadEnv(mode, import.meta.dirname, ''), ...process.env }), {
     // Sem isso o 404 do dev server vai sem Cache-Control e o Chrome o guarda: se uma foto some por um
     // instante (ex.: optimize-images regravando public/), ela fica quebrada no navegador mesmo depois de voltar.
     name: 'dev-no-cached-404',
