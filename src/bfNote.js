@@ -1,0 +1,2 @@
+// Nota de Black Friday perto do preço (sem dependências: também roda no pré-render do build).
+export const BF_NOTE = `<p class="bf-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><span><strong>Black Friday:</strong> frete grátis na Grande SP e entrega no mesmo dia para compras de segunda a sexta, até as 12h.</span></p>`;

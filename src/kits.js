@@ -11,27 +11,44 @@ export const shopUrl = (kit, v) => {
   return h ? `${LOJA}/products/${h}` : SHOP_COLLECTION;
 };
 
-// Preços da loja Shopify (conferidos em 26/10/2026, produtos ativos na Loja Online). Chave = handle do produto.
+// Preços da loja Shopify (conferidos em 09/11/2026, Black Friday). Chave = handle do produto.
+// p = preço final (price); de = preço riscado (compareAtPrice), ou null sem desconto.
 // Mudou o preço na loja? Atualize aqui. Combinação sem produto na loja mostra "Preço em breve".
+// O Kit Quarteto de Aromas não existe mais na loja (09/11): fica sem preço até voltar.
 const PRICES = {
-  'kit-classico-presente-natal-sabonetes-naturais-essencias-vela-e-bucha-vegetal': 44.5,
-  'kit-natal-amendoa-doce-sabonetes-de-calendula-e-barbatimao-oleo-vegetal-e-bucha-vegetal': 31.5,
-  'kit-natal-semente-de-uva-sabonetes-de-barbatimao-com-aroeira-e-coco-oleo-vegetal-e-bucha-vegetal': 40,
-  'kit-natal-canela-e-cravo-sabonetes-naturais-oleos-essenciais-e-bucha-vegetal': 77,
-  'kit-natal-quarteto-de-aromas-oleo-essencial-de-cravo-oleo-de-canela-e-2-oleos-aromaticos-de-10-ml': 90,
-  'kit-5-oleos-essenciais-alquiverde-lavanda-capim-limao-alecrim-cravo-e-tangerina-caixa-dourada': 100,
-  'kit-natal-aromatizador-eletrico-com-oleo-essencial-de-alecrim-10-ml': 30,
-  'kit-natal-oleo-essencial-de-laranja-sabonete-vegetal-sortido-90-g-caixa-dourada': 30,
-  'kit-natal-presente-variado-3-sabonetes-vegetais-sortidos-90-g-caixa-dourada': 26,
-  'kit-natal-oleo-de-semente-de-uva-puro-e-natural-caixa-dourada': 30,
-  'vela-aromatica-panetone-natal-perfumada-copo-de-vidro': 20,
-  'vela-aromatica-gingerbread-natal-perfumada-copo-de-vidro': 20,
-  'kit-natal-caixa-prata-6-sabonetes-vegetais-de-barbatimao-calendula-e-aroeira': 30,
+  'kit-classico-presente-natal-sabonetes-naturais-essencias-vela-e-bucha-vegetal': { p: 52, de: 69.9 },
+  'kit-natal-amendoa-doce-sabonetes-de-calendula-e-barbatimao-oleo-vegetal-e-bucha-vegetal': { p: 40, de: 55 },
+  'kit-natal-semente-de-uva-sabonetes-de-barbatimao-com-aroeira-e-coco-oleo-vegetal-e-bucha-vegetal': { p: 40, de: 65.5 },
+  'kit-natal-canela-e-cravo-sabonetes-naturais-oleos-essenciais-e-bucha-vegetal': { p: 77, de: 105 },
+  'kit-5-oleos-essenciais-alquiverde-lavanda-capim-limao-alecrim-cravo-e-tangerina-caixa-dourada': { p: 100, de: 129.99 },
+  'kit-natal-aromatizador-eletrico-com-oleo-essencial-de-alecrim-10-ml': { p: 45, de: 50 },
+  'kit-natal-oleo-essencial-de-laranja-sabonete-vegetal-sortido-90-g-caixa-dourada': { p: 30, de: 50 },
+  'kit-natal-presente-variado-3-sabonetes-vegetais-sortidos-90-g-caixa-dourada': { p: 26, de: 39.99 },
+  'kit-natal-oleo-de-semente-de-uva-puro-e-natural-caixa-dourada': { p: 30, de: 50 },
+  'vela-aromatica-panetone-natal-perfumada-copo-de-vidro': { p: 20, de: null },
+  'vela-aromatica-gingerbread-natal-perfumada-copo-de-vidro': { p: 20, de: null },
+  'kit-natal-caixa-prata-6-sabonetes-vegetais-de-barbatimao-calendula-e-aroeira': { p: 45, de: 50 },
 };
 const brl = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+const priceOf = (kit, v) => PRICES[v?.shop || kit?.shop];
+const offOf = (x) => (x?.de && x.de > x.p ? Math.round((1 - x.p / x.de) * 100) : 0);
+// maior desconto da coleção, para o aviso de Black Friday (sempre bate com a tabela)
+export const MAX_OFF = Math.max(0, ...Object.values(PRICES).map(offOf));
 export const priceText = (kit, v) => {
-  const p = PRICES[v?.shop || kit?.shop];
-  return p ? brl.format(p) : 'Preço em breve';
+  const x = priceOf(kit, v);
+  if (!x) return 'Preço em breve';
+  const off = offOf(x);
+  return off ? `De ${brl.format(x.de)} por ${brl.format(x.p)} (${off}% de desconto)` : brl.format(x.p);
+};
+// versão visual: preço antigo riscado, preço final e selo de desconto
+export const priceHTML = (kit, v) => {
+  const x = priceOf(kit, v);
+  if (!x) return 'Preço em breve';
+  const off = offOf(x);
+  if (!off) return `<span class="price__now">${brl.format(x.p)}</span>`;
+  return `<span class="sr-only">${priceText(kit, v)}</span><span class="price" aria-hidden="true">`
+    + `<s class="price__was">${brl.format(x.de)}</s><span class="price__now">${brl.format(x.p)}</span>`
+    + `<span class="price__off">−${off}%</span></span>`;
 };
 
 const FELIZ_RESTO = ['Essência Morango com Champanhe', 'Essência Natal', 'Vela aromática de Panetone', 'Bucha vegetal', 'Caixa vermelha com visor'];
@@ -189,7 +206,7 @@ export function renderKits(track) {
           <summary>O que vem na caixa <span aria-hidden="true">+</span></summary>
           <ul>${(k.itemsFor ? k.itemsFor(v) : k.items).map((it) => `<li>${it}</li>`).join('')}</ul>
         </details>
-        <p class="kit__price">${priceText(k, v)}</p>
+        <p class="kit__price">${priceHTML(k, v)}</p>
         <div class="kit__actions">
           <a class="kit__add" href="${shopUrl(k, v)}" data-add="${k.id}">
             <span>Quero presentear</span>${arrow}

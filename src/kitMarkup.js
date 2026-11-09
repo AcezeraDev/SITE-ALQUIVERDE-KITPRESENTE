@@ -1,5 +1,6 @@
 import { KIT_PAGES, SOAP_INFO, ITEM_INFO, variantsOf, soapVarieties, careOf } from './kitPages.js';
-import { KITS, shopUrl, priceText } from './kits.js';
+import { KITS, shopUrl, priceHTML } from './kits.js';
+import { BF_NOTE } from './bfNote.js';
 
 import { kitPath } from './seo.js';
 import { sizeImages } from './imageSizes.js';
@@ -147,9 +148,10 @@ function render(variant = 0, lightMode = false) {
           : `<p class="variant-fixed kp-in">${v0.label}</p>`}
         <ul class="kp-facts kp-in" aria-label="Resumo do kit">${page.facts.map((f) => `<li>${f}</li>`).join('')}</ul>
         <div class="kp-buy kp-in">
-          <p class="kp-price">${priceText(KITS.find((k) => k.id === page.kitId), KITS.find((k) => k.id === page.kitId)?.variants[vi])}</p>
+          <p class="kp-price">${priceHTML(KITS.find((k) => k.id === page.kitId), KITS.find((k) => k.id === page.kitId)?.variants[vi])}</p>
           <a class="kit__add" id="kpShop" href="${shopUrl(KITS.find((k) => k.id === page.kitId), KITS.find((k) => k.id === page.kitId)?.variants[vi])}"><span>Quero presentear</span>${arrow}</a>
           <a class="text-link" href="#caixa">Ver o que vem na caixa</a>
+          ${BF_NOTE}
         </div>
       </div>
     </div>

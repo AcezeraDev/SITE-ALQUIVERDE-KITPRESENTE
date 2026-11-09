@@ -11,10 +11,11 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import Lenis from 'lenis';
 import { KIT_PAGES, SOAP_INFO, ITEM_INFO, variantsOf, soapVarieties, careOf } from './kitPages.js';
-import { KITS, shopUrl, priceText } from './kits.js';
+import { KITS, shopUrl, priceHTML } from './kits.js';
 import { tilt, magicCard, magnetic } from './fx.js';
 import { decorateSections } from './decor.js';
 import { initWhatsApp } from './whatsapp.js';
+import { initBlackFriday } from './bf.js';
 import { lazyScene, idleTask, warmUpScenes } from './lazy.js';
 
 const { initKitViewer, initSoapStage, initModelViewer } = await (lightMode ? import('./lightScenes.js') : import('./fullScenes.js'));
@@ -49,6 +50,7 @@ function build() {
   document.documentElement.style.setProperty('--kink', page.ink);
   decorateSections();
   initWhatsApp();
+  initBlackFriday({ reduced: true }); // aqui só preenche os números; a seção animada é da home
 
   wire(variants, vi);
 }
@@ -149,7 +151,7 @@ function wire(variants, vi) {
     cur = j;
     const kit = KITS.find((k) => k.id === page.kitId);
     $('#kpShop').href = shopUrl(kit, kit?.variants[j]);
-    $('.kp-price').textContent = priceText(kit, kit?.variants[j]);
+    $('.kp-price').innerHTML = priceHTML(kit, kit?.variants[j]);
     $$('.variant[data-v]').forEach((x) => x.setAttribute('aria-checked', String(x === b)));
     const img = $('.kp-hero__img');
     setImageSource(img, v.img); img.alt = v.title || `${page.name}: ${v.label}`;

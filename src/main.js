@@ -10,7 +10,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
 import Lenis from 'lenis';
-import { renderKits, renderIngredients, findKit, KITS, shopUrl, priceText } from './kits.js';
+import { renderKits, renderIngredients, findKit, KITS, shopUrl, priceHTML } from './kits.js';
 import { sparkles, magicCard, tilt, magnetic } from './fx.js';
 import { lazyScene, idleTask, warmUpScenes } from './lazy.js';
 import { loadBag, saveBag } from './bag.js';
@@ -18,6 +18,7 @@ import { initHeroDecor } from './heroDecor.js';
 import { initKitStage } from './kitStage.js';
 import { decorateSections } from './decor.js';
 import { initWhatsApp } from './whatsapp.js';
+import { initBlackFriday } from './bf.js';
 
 const { initUnbox, RITUAL_KITS, initSoapStage, SOAP_KEYS, initKitViewer } = await (lightMode ? import('./lightScenes.js') : import('./fullScenes.js'));
 
@@ -40,6 +41,7 @@ const stageMode = !reduced && matchMedia('(min-width: 1024px)').matches;
 if (!$('#ingGrid').querySelector('.ing-card')) renderIngredients($('#ingGrid'));
 decorateSections();
 initWhatsApp();
+initBlackFriday({ reduced });
 if (lightMode) {
   $('.monte-cta .section-sub').textContent = 'Caixa de 3, 6 ou 9 sabonetes, do jeito que você quiser, com essências, óleos e vela. A prévia mostra cada item na caixa.';
   $('.ingredients .section-sub').textContent = 'Sabonetes vegetais de 90 g. Escolha um ingrediente para conhecer os detalhes e encontrar o seu favorito.';
@@ -236,7 +238,7 @@ $$('.kit').forEach((kitEl) => {
     $$('.variant', kitEl).forEach((b) => b.setAttribute('aria-checked', String(b === btn)));
     current = kit.variants.find((v) => v.front === btn.dataset.front);
     $('.kit__add', kitEl).href = shopUrl(kit, current); // cada combinação leva ao seu produto na loja
-    $('.kit__price', kitEl).textContent = priceText(kit, current);
+    $('.kit__price', kitEl).innerHTML = priceHTML(kit, current);
     // combinação com modelo 3D liga a vitrine; as outras voltam para a foto
     const want3d = btn.dataset['3d'] === 'true';
     if (want3d) kitEl.dataset.model = btn.dataset.model; // o palco do desktop lê a caixa da combinação atual

@@ -13,9 +13,12 @@ import { idleTask } from './lazy.js';
 import { loadBag, addToBag } from './bag.js';
 import { decorateSections } from './decor.js';
 import { initWhatsApp } from './whatsapp.js';
+import { initBlackFriday } from './bf.js';
+import { BF_NOTE } from './bfNote.js';
 
 decorateSections();
 initWhatsApp();
+initBlackFriday({ reduced: true });
 
 const { initBuilder, SOAP_KEYS } = await (lightMode ? import('./lightScenes.js') : import('./fullScenes.js'));
 
@@ -109,6 +112,7 @@ $('#mkPanel').innerHTML = `
     <h2 id="mkS4">Seu kit</h2>
     <ul class="mk-list" id="mkList"></ul>
     <p class="mk-price">Preço em breve</p>
+    ${BF_NOTE}
     <div class="mk-cta">
       <button type="button" class="kit__add" id="mkClose" disabled><span>Fechar a caixa</span>${arrow}</button>
       <div class="mk-done" id="mkDone" hidden>
