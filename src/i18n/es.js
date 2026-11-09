@@ -17,7 +17,7 @@ const NAMES = {
 const TEXT = {
   // ---- unidades e pedaços curtos
   '10 mL': '10 mL', '10 mL cada': '10 mL cada uno', '90 g cada': '90 g cada uno', A: 'A', O: 'El', '; o': '; el', e: 'y', 'e a': 'y la', 'e o': 'y el',
-  '% de desconto': '% de descuento', '% off': '% de descuento', '(opcional)': '(opcional)', 'obrigatório': 'obligatorio', '21 a 50': '21 a 50', '51 a 150': '51 a 150',
+  '% de desconto': '% de descuento', '% off': '% OFF', '(opcional)': '(opcional)', 'obrigatório': 'obligatorio', '21 a 50': '21 a 50', '51 a 150': '51 a 150',
   'Até 20': 'Hasta 20', 'Mais de 150': 'Más de 150', presentes: 'regalos', presente: 'regalo', ver: 'ver', 'Arraste para girar': 'Arrastra para girar', 'arraste para girar': 'arrastra para girar',
 
   // ---- Black Friday
