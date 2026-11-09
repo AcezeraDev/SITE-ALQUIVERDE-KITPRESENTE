@@ -26,7 +26,7 @@ for (const route of manifest.routes) {
     const desc = document.querySelector('meta[name="description"]')?.content;
     assert.ok(desc && !descriptions.has(desc), 'unique nonempty description'); descriptions.add(desc);
     assert.equal(document.querySelectorAll('h1').length, 1, 'one H1');
-    assert.equal(document.documentElement.lang, 'pt-BR');
+    assert.equal(document.documentElement.lang, { en: 'en', es: 'es' }[route.path.split('/')[1]] || 'pt-BR');
     assert.equal(document.querySelector('meta[name="robots"]').content.includes('noindex'), route.noindex);
     if (manifest.siteUrl) {
       assert.equal(document.querySelectorAll('link[rel="canonical"]').length, 1);

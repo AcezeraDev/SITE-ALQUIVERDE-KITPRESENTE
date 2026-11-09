@@ -89,6 +89,14 @@
       <a href="#ingredientes" data-magnetic>Ingredientes</a>
       <a href="#empresas" data-magnetic>Para empresas</a>
     </nav>
+    <details class="lang" translate="no">
+      <summary aria-label="Idioma · Language"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 3.8 5.7 3.8 9s-1.2 6.3-3.8 9c-2.6-2.7-3.8-5.7-3.8-9S9.4 5.7 12 3Z"/></svg><span class="lang__cur">PT</span></summary>
+      <ul class="lang__menu">
+        <li><a href="/" data-lang="pt" hreflang="pt-BR" lang="pt-BR" aria-current="true">Português <small>PT</small></a></li>
+        <li><a href="/en/" data-lang="en" hreflang="en" lang="en">English <small>EN</small></a></li>
+        <li><a href="/es/" data-lang="es" hreflang="es" lang="es">Español <small>ES</small></a></li>
+      </ul>
+    </details>
     <button class="bag-btn" id="bagBtn" type="button" aria-label="Abrir sacola de presentes" aria-controls="bag" aria-expanded="false" data-magnetic>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 12H6.2L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
       <span>Sacola</span>
@@ -238,29 +246,44 @@
       <svg class="hero__scallop" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40V18Q30 40 60 18Q90 40 120 18Q150 40 180 18Q210 40 240 18Q270 40 300 18Q330 40 360 18Q390 40 420 18Q450 40 480 18Q510 40 540 18Q570 40 600 18Q630 40 660 18Q690 40 720 18Q750 40 780 18Q810 40 840 18Q870 40 900 18Q930 40 960 18Q990 40 1020 18Q1050 40 1080 18Q1110 40 1140 18Q1170 40 1200 18Q1230 40 1260 18Q1290 40 1320 18Q1350 40 1380 18Q1410 40 1440 18V40Z"/></svg>
     </section>
 
-    <!-- ===== Black Friday (mesmas informações do banner da loja) ===== -->
+    <!-- ===== Black Friday (mesmas informações do banner da loja; animação em bf.js) ===== -->
     <section class="bf" id="black-friday" aria-labelledby="bfTitle">
       <div class="bf__card">
-        <span class="bf__leaf bf__leaf--a" aria-hidden="true"></span>
-        <span class="bf__leaf bf__leaf--b" aria-hidden="true"></span>
+        <div class="bf__aurora" aria-hidden="true"><span class="bf__blob bf__blob--a"></span><span class="bf__blob bf__blob--b"></span><span class="bf__blob bf__blob--c"></span></div>
+        <div class="bf__sparks" aria-hidden="true"></div>
+
         <div class="bf__copy">
-          <p class="bf__eyebrow bf__in">Black Friday Alquiverde</p>
-          <h2 class="bf__title bf__in" id="bfTitle">Frete grátis <em>na Grande SP</em></h2>
-          <p class="bf__same bf__in">Entrega no mesmo dia</p>
-          <p class="bf__when bf__in">Para compras de segunda a sexta, até as 12h.</p>
-          <div class="bf__ctas bf__in">
-            <a class="bf__cta" href="#colecao">Ver kits com desconto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <p class="bf__eyebrow"><span class="bf__pill"><i aria-hidden="true"></i>Black Friday Alquiverde</span></p>
+          <h2 class="bf__title" id="bfTitle"><span class="bf__line"><span class="bf__split">Frete grátis</span></span> <em class="bf__line bf__line--em"><span class="bf__split">na Grande SP</span><svg class="bf__underline" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12C60 4 140 3 297 9"/></svg></em></h2>
+          <div class="bf__same bf__in">
+            <span class="bf__clock" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17"/><path class="bf__hand bf__hand--h" d="M20 20V11"/><path class="bf__hand bf__hand--m" d="M20 20h9"/></svg></span>
+            <div>
+              <p class="bf__same-t">Entrega no mesmo dia</p>
+              <p class="bf__when">Para compras de segunda a sexta, até as 12h.</p>
+            </div>
+          </div>
+          <div class="bf__live bf__in">
             <p class="bf-live" aria-live="polite"><span class="bf-live__dot" aria-hidden="true"></span><span><b>Grande SP:</b> <span data-bf-status>Pedidos de segunda a sexta, até 12h</span></span></p>
+            <p class="bf__digits" aria-hidden="true" hidden><span data-bf-u="h">00</span><i>:</i><span data-bf-u="m">00</span><i>:</i><span data-bf-u="s">00</span></p>
+          </div>
+          <div class="bf__ctas bf__in">
+            <a class="bf__cta" href="#colecao"><span>Ver kits com desconto</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           </div>
         </div>
-        <div class="bf__glass bf__in">
-          <p class="bf__num"><span>Kits de Natal com até</span><span data-bf-off>40</span><small>% off</small></p>
-          <p class="bf__numsub">Preço de Black Friday já aplicado em cada kit, igual ao da loja.</p>
-          <ul class="bf__list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><span>Frete grátis para a Grande SP</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>Entrega no mesmo dia em compras de segunda a sexta, até as 12h</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 10h16v10H4zM3 7h18v3H3zM12 7v13M12 7c-2-4-6-3-5 0M12 7c2-4 6-3 5 0"/></svg><span>Kits montados à mão, prontos para presentear</span></li>
-          </ul>
+
+        <div class="bf__tagwrap">
+          <svg class="bf__cord" viewBox="0 0 40 300" preserveAspectRatio="none" aria-hidden="true"><path d="M20 0C13 90 27 190 20 300"/></svg>
+          <div class="bf__tag">
+            <span class="bf__hole" aria-hidden="true"></span>
+            <p class="bf__tag-k">Kits de Natal com até</p>
+            <p class="bf__num"><span data-bf-off>40</span><small>% off</small></p>
+            <p class="bf__tag-sub">Preço de Black Friday já aplicado em cada kit, igual ao da loja.</p>
+            <p class="bf__tag-foot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10h16v10H4zM3 7h18v3H3zM12 7v13M12 7c-2-4-6-3-5 0M12 7c2-4 6-3 5 0"/></svg><span>Kits montados à mão, prontos para presentear</span></p>
+          </div>
+        </div>
+
+        <div class="bf__rail" role="region" aria-label="Kits com desconto">
+          <ul class="bf__track" data-bf-deals></ul>
         </div>
       </div>
     </section>

@@ -50,7 +50,11 @@ export function seoHead(meta, { siteUrl = '', indexable = false, graph = [] } = 
   <title>${escapeHTML(meta.title)}</title>
   <meta name="description" content="${escapeHTML(meta.description)}" />
   <meta name="robots" content="${blocked ? 'noindex, follow' : 'index, follow, max-image-preview:large'}" />
-  ${siteUrl ? `<link rel="canonical" href="${escapeHTML(absolute(meta.path))}" />` : ''}
+  ${siteUrl ? `<link rel="canonical" href="${escapeHTML(absolute(meta.path))}" />
+  <link rel="alternate" hreflang="pt-BR" href="${escapeHTML(absolute(meta.path))}" />
+  <link rel="alternate" hreflang="en" href="${escapeHTML(absolute(`/en${meta.path}`))}" />
+  <link rel="alternate" hreflang="es" href="${escapeHTML(absolute(`/es${meta.path}`))}" />
+  <link rel="alternate" hreflang="x-default" href="${escapeHTML(absolute(meta.path))}" />` : ''}
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:site_name" content="AlquiVerde · Kits para presente" />

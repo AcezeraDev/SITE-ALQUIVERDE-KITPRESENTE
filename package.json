@@ -13,7 +13,8 @@
     "test": "node --test tests/*.test.mjs",
     "test:browser": "node tools/browser-check.mjs",
     "audit:html": "node tools/audit-html.mjs",
-    "images:optimize": "node tools/optimize-images.mjs && node tools/image-sizes.mjs"
+    "images:optimize": "node tools/optimize-images.mjs && node tools/image-sizes.mjs",
+    "i18n:extract": "node tools/i18n-extract.mjs"
   },
   "dependencies": {
     "gsap": "3.13.0",

@@ -4,6 +4,9 @@ import { KIT_PAGES } from '../src/kitPages.js';
 import { renderKits, renderIngredients } from '../src/kits.js';
 import { kitRenderer } from '../src/kitMarkup.js';
 import { HOME_META, BUILDER_META, kitMetadata, seoHead, schemaGraph, kitPath, escapeHTML } from '../src/seo.js';
+import { translateHTML, missingReport } from './i18n-build.mjs';
+
+const OTHER_LANGS = ['en', 'es'];
 
 export function siteSettings(env) {
   const value = env.SITE_URL?.trim();
@@ -37,15 +40,25 @@ export function seoBuild(env) {
       server.middlewares.use(async (req, res, next) => {
         const url = new URL(req.url, 'http://localhost');
         if (redirectLegacy(url, res)) return;
+        // /en/... e /es/...: a mesma página em português, traduzida na hora
+        const lang = url.pathname.match(/^\/(en|es)(?=\/)/)?.[1];
+        if (lang && !/\.\w+$/.test(url.pathname.replace(/\.html$/, ''))) {
+          const ptPath = url.pathname.slice(lang.length + 1) || '/';
+          if (url.pathname === `/${lang}`) { res.writeHead(301, { Location: `/${lang}/` }); res.end(); return; }
+          try {
+            const html = await devPage(server, ptPath, settings);
+            if (html == null) return next();
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
+            res.end(translateHTML(html, lang, ptPath, settings));
+          } catch (error) { next(error); }
+          return;
+        }
         const slug = url.pathname.match(/^\/kits\/([a-z0-9-]+)\/$/)?.[1];
         if (!slug) return next();
         const page = KIT_PAGES[slug];
         if (!page) { res.statusCode = 404; res.end('Kit não encontrado'); return; }
         try {
-          let template = await readFile(resolve(root, 'kit.html'), 'utf8');
-          template = replaceHead(template, kitMetadata(page), settings, page)
-            .replace(/<div id="kitRoot">[\s\S]*?<\/div>/, `<div id="kitRoot" data-slug="${page.slug}" data-rendered="true">${kitRenderer(page).render().html}</div>`);
-          const html = await server.transformIndexHtml(url.pathname, template);
+          const html = await devPage(server, url.pathname, settings);
           res.setHeader('Content-Type', 'text/html; charset=utf-8');
           res.end(html);
         } catch (error) { next(error); }
@@ -84,6 +97,23 @@ export function seoBuild(env) {
         await writeFile(resolve(dir, 'index.html'), document);
         routes.push(meta);
       }
+      // Versões em inglês e espanhol: home, montador e cada kit, traduzidos a partir do HTML final em português.
+      const sources = [['/', 'index.html'], ['/monte.html', 'monte.html'], ...Object.values(KIT_PAGES).map((p) => [kitPath(p.slug), `kits/${p.slug}/index.html`])];
+      const langRoutes = [];
+      for (const lang of OTHER_LANGS) {
+        for (const [ptPath, file] of sources) {
+          const html = await readFile(resolve(out, file), 'utf8');
+          const target = resolve(out, lang, file);
+          await mkdir(resolve(target, '..'), { recursive: true });
+          await writeFile(target, translateHTML(html, lang, ptPath, settings));
+          const meta = routes.find((r) => r.path === ptPath);
+          langRoutes.push({ ...meta, path: `/${lang}${ptPath}` });
+        }
+      }
+      routes.push(...langRoutes);
+      const report = missingReport();
+      await writeFile(resolve(out, 'i18n-missing.json'), JSON.stringify(report, null, 2));
+      for (const [lang, list] of Object.entries(report)) if (list.length) console.warn(`i18n ${lang}: ${list.length} textos sem tradução (dist/i18n-missing.json)`);
       // Generic legacy page remains usable without JavaScript and is never indexed.
       const legacy = template.replace(/<div id="kitRoot">[\s\S]*?<\/div>/, `<div id="kitRoot"><section class="seo-help"><h1>Escolha seu kit de Natal</h1><p>Conheça os presentes AlquiVerde e os itens de cada caixa.</p><ul>${Object.values(KIT_PAGES).map((p) => `<li><a href="${kitPath(p.slug)}">${escapeHTML(p.name)}</a></li>`).join('')}</ul></section></div>`);
       await writeFile(resolve(out, 'kit.html'), legacy);
@@ -97,6 +127,22 @@ export function seoBuild(env) {
       console.log(`SEO: ${routes.length} páginas com HTML estático; ${published.length} URLs no sitemap.${!settings.indexable ? ' Revisão noindex: configure SITE_URL para produção.' : ''}`);
     },
   };
+}
+
+// HTML de uma página em português no servidor de desenvolvimento (null se não existir).
+async function devPage(server, ptPath, settings) {
+  const root = server.config.root;
+  const slug = ptPath.match(/^\/kits\/([a-z0-9-]+)\/$/)?.[1];
+  if (slug) {
+    const page = KIT_PAGES[slug];
+    if (!page) return null;
+    const template = replaceHead(await readFile(resolve(root, 'kit.html'), 'utf8'), kitMetadata(page), settings, page)
+      .replace(/<div id="kitRoot">[\s\S]*?<\/div>/, `<div id="kitRoot" data-slug="${page.slug}" data-rendered="true">${kitRenderer(page).render().html}</div>`);
+    return server.transformIndexHtml(ptPath, template);
+  }
+  const file = ptPath === '/' ? 'index.html' : ptPath === '/monte.html' ? 'monte.html' : null;
+  if (!file) return null;
+  return server.transformIndexHtml(`/${file}`, await readFile(resolve(root, file), 'utf8'));
 }
 
 // Mirrors the committed Vercel redirects for local verification.

@@ -13,7 +13,7 @@ export function fallbackScene(canvas, { photo, soap, builder = false } = {}) {
       image.classList.add('kp-layer');
       image.dataset.layer = canvas.dataset.layer;
     }
-    image.alt = canvas.getAttribute('aria-label')?.split(' em 3D')[0] || 'Kit de presente';
+    image.alt = canvas.getAttribute('aria-label')?.split(/ (?:em|in|en) 3D/)[0] || 'Kit de presente';
     setImageSource(image, photo || `/soaps/${soap}.webp`);
     canvas.after(image);
   }

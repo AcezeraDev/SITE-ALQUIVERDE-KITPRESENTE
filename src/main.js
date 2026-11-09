@@ -1,3 +1,4 @@
+import './i18n.js'; // primeiro: idioma da página (ver src/i18nCore.js)
 import { setImageSource } from './imageSizes.js';
 import { lightMode } from './experience.js';
 import './light.css';

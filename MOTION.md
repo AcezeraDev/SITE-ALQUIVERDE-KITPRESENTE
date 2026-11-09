@@ -51,6 +51,14 @@ Mesma tese ("papel que se desembrulha") e os mesmos tokens. Referências extras:
 - **Reduced motion:** sem cortina, sem scrub; frase final já acesa.
 
 
+## Black Friday (home, `bf.js` + `bf.css`)
+Mesma tese: o cartão verde-floresta **se abre como papel** (clip-path de `inset(10% 6%)` a `inset(0)`, 1,2 s, `power3.inOut`); o selo dourado aparece com `back.out(2)`; o título sobe letra a letra (SplitText, rotateX −60°, stagger 0,022 s, `expo.out`); o sublinhado dourado é desenhado (DrawSVG, 0,9 s); a **etiqueta de desconto cai pendurada no cordão e balança até parar** (`elastic.out(1.1, 0.25)`, 2,2 s), com o número contando de 0 até o maior desconto; depois respira (±2,4°, `sine.inOut`). Passar o mouse na etiqueta faz ela balançar de novo.
+- Ambiente: aurora de três manchas de luz em CSS (só transform), estrelas douradas (`sparkles`), grão, luz que segue o ponteiro; etiqueta inclina na direção do mouse (quickTo).
+- Rolagem: aurora e etiqueta em parallax (scrub). Faixa de ofertas (kits com desconto, foto + de/por + selo) corre em loop, desacelera com o mouse, para com o foco do teclado e fora da tela.
+- Relógio: ponteiros giram; antes das 12h em dia útil (horário de Brasília) aparece a contagem regressiva HH:MM:SS com os dígitos virando com mola.
+- Movimento reduzido e modo leve: tudo no estado final, sem loops; faixa de ofertas vira rolagem manual.
+- Referências: skills Awwwards Motion (mola, vidro sobre escuro, luz do ponteiro), GSAP ScrollTrigger (timeline única no enter, scrub só no parallax), UI/UX Pro Max (stagger, reduced-motion, foco visível). Catálogo pessoal consultado (`features-000007`, resend.com: seção escura em 2 colunas), sem equivalente direto.
+
 ## Modo leve opcional
 - Botão persistente “Modo leve”, disponível nas três páginas; preferência guardada no navegador.
 - `?leve=1` ativa e `?leve=0` desativa, inclusive quando o armazenamento está bloqueado.

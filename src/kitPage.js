@@ -1,3 +1,4 @@
+import './i18n.js'; // primeiro: idioma da página (ver src/i18nCore.js)
 import { setImageSource } from './imageSizes.js';
 import { kitMetadata } from './seo.js';
 import { kitRenderer } from './kitMarkup.js';

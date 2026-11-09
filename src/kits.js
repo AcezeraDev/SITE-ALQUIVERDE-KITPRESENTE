@@ -40,6 +40,13 @@ export const priceText = (kit, v) => {
   const off = offOf(x);
   return off ? `De ${brl.format(x.de)} por ${brl.format(x.p)} (${off}% de desconto)` : brl.format(x.p);
 };
+// kits com desconto (maior primeiro), para a faixa de ofertas da Black Friday
+export const discountedKits = () => KITS.map((k) => {
+  const v = k.variants.find((x) => offOf(priceOf(k, x))) || k.variants[0];
+  const x = priceOf(k, v);
+  const page = pageForKit(k.id);
+  return { name: k.name, tone: k.tone, img: `/kits/${v.front}.webp`, href: page ? kitPath(page.slug) : `/#colecao`, now: x && brl.format(x.p), was: x?.de && brl.format(x.de), off: offOf(x) };
+}).filter((d) => d.off).sort((a, b) => b.off - a.off);
 // versão visual: preço antigo riscado, preço final e selo de desconto
 export const priceHTML = (kit, v) => {
   const x = priceOf(kit, v);
